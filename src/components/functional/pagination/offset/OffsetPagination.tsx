@@ -8,8 +8,8 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { OffsetPaginationProps, PaginationChangeData } from "./types";
-import { calculateTotalPages, getPageNumbers } from "./utils";
+import { OffsetPaginationProps, PaginationChangeData } from "../types";
+import { calculateTotalPages, getPageNumbers } from "../utils";
 
 /**
  * OffsetPagination - A higher-level pagination component that implements

@@ -8,8 +8,8 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { CursorPaginationProps, PaginationChangeData } from "./types";
-import { calculateTotalPages, getPageNumbers } from "./utils";
+import { CursorPaginationProps, PaginationChangeData } from "../types";
+import { calculateTotalPages, getPageNumbers } from "../utils";
 
 /**
  * CursorPagination - A higher-level pagination component that implements

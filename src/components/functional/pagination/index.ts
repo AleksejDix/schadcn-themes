@@ -1,5 +1,5 @@
 // Export all pagination components and types
-export * from "./OffsetPagination";
-export * from "./CursorPagination";
+export * from "./offset";
+export * from "./cursor";
 export * from "./types";
 export * from "./utils";

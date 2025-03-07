@@ -10,11 +10,35 @@ Our component library follows a two-tier architecture:
 
 2. **Functional Components (Level 2)** - These components (in this directory) implement the actual functionality on top of the UI components, handling all the logic and state management.
 
+## Folder Structure
+
+The pagination components are organized into separate folders:
+
+```
+src/components/functional/pagination/
+├── offset/                # Offset-based pagination
+│   ├── OffsetPagination.tsx      # Component implementation
+│   ├── OffsetPagination.test.tsx # Tests
+│   ├── OffsetPagination.stories.tsx # Storybook stories
+│   ├── README.md          # Component documentation
+│   └── index.ts           # Export
+├── cursor/                # Cursor-based pagination
+│   ├── CursorPagination.tsx      # Component implementation
+│   ├── CursorPagination.test.tsx # Tests
+│   ├── CursorPagination.stories.tsx # Storybook stories
+│   ├── README.md          # Component documentation
+│   └── index.ts           # Export
+├── types.ts               # Shared type definitions
+├── utils.ts               # Shared utility functions
+├── index.ts               # Main exports
+└── README.md              # This file
+```
+
 ## Available Components
 
 ### OffsetPagination
 
-The `OffsetPagination` component implements traditional page number-based pagination, where you navigate by page numbers.
+The `OffsetPagination` component implements traditional page number-based pagination. See the [OffsetPagination README](./offset/README.md) for details.
 
 ```tsx
 import { OffsetPagination } from "@/components/functional/pagination";
@@ -42,7 +66,7 @@ function MyList() {
 
 ### CursorPagination
 
-The `CursorPagination` component implements cursor-based pagination, typically used for API-driven pagination where each "page" has a cursor that points to the next set of results.
+The `CursorPagination` component implements cursor-based pagination, typically used for API-driven pagination. See the [CursorPagination README](./cursor/README.md) for details.
 
 ```tsx
 import { CursorPagination } from "@/components/functional/pagination";
@@ -76,59 +100,28 @@ function MyList() {
 }
 ```
 
-## Storybook Controls and Actions
+## Storybook Integration
 
-The pagination components come with comprehensive Storybook integration:
+Each pagination component has its own Storybook stories with interactive controls and actions:
 
-### Controls
-
-The following controls are available in Storybook:
-
-- `initialPage` - Initial page to show (number)
-- `itemsPerPage` - Number of items per page (number)
-- `totalItems` - Total number of items (number)
-- `maxPageButtons` - Maximum number of page buttons to display (number)
-- `disabled` - Whether pagination is disabled (boolean)
-
-These controls allow you to test different configurations of the pagination components interactively.
-
-### Actions
-
-Actions are logged in the Storybook Actions panel for the following events:
-
-- `page-change` - Fired when a page number is clicked in OffsetPagination
-- `cursor-change` - Fired when a page with a cursor is clicked in CursorPagination
-- `direction-change` - Fired when a directional navigation occurs in CursorPagination
+- **Offset Pagination** - Available under 'Functional/Pagination/Offset'
+- **Cursor Pagination** - Available under 'Functional/Pagination/Cursor'
 
 ## Testing
 
-The pagination components have comprehensive test coverage:
+Each component has dedicated tests covering basic functionality, edge cases, and user interactions.
 
-### Unit Tests
-
-The following tests are included:
-
-- Basic rendering tests
-- Page number generation tests
-- Click handling tests
-- Disabled state tests
-- Edge case tests (single page, missing cursors)
-
-To run the tests:
+Run the tests with:
 
 ```bash
 npm run test
 ```
 
-## Utilities
+## Shared Types and Utilities
 
-This directory also includes utility functions for pagination:
+The components share common types and utility functions:
 
-- `calculateTotalPages` - Calculate the total number of pages based on total items and items per page
-- `getPageNumbers` - Generate an array of page numbers to display, including ellipsis placeholders
-- `getPaginationLabel` - Generate a human-readable label for the current pagination state
-
-## Types
+### Types
 
 The component types are defined in `types.ts`:
 
@@ -136,3 +129,11 @@ The component types are defined in `types.ts`:
 - `OffsetPaginationProps` - Props specific to offset-based pagination
 - `CursorPaginationProps` - Props specific to cursor-based pagination
 - `PaginationChangeData` - Data returned by pagination callbacks
+
+### Utilities
+
+This directory also includes utility functions for pagination in `utils.ts`:
+
+- `calculateTotalPages` - Calculate the total number of pages based on total items and items per page
+- `getPageNumbers` - Generate an array of page numbers to display, including ellipsis placeholders
+- `getPaginationLabel` - Generate a human-readable label for the current pagination state
