@@ -42,6 +42,55 @@ MDC (Modern Design Components) is a component library built with React and TypeS
 - **Deployment**
   - Vercel (configured for storybook deployment)
 
+## Component Architecture
+
+MDC follows a two-tier component architecture:
+
+1. **UI Components (Level 1)** - Located in `/src/components/ui/`
+
+   - Basic UI building blocks from shadcn/ui
+   - Provide visual elements without much functionality
+   - Focus on styling, accessibility, and theming
+   - Examples: Button, Pagination UI, Card, etc.
+
+2. **Functional Components (Level 2)** - Located in `/src/components/functional/`
+   - Implement actual functionality on top of UI components
+   - Handle state management, data fetching, and business logic
+   - Provide a higher-level API for application developers
+   - Examples: DataTable, OffsetPagination, CursorPagination, etc.
+
+This architecture provides several benefits:
+
+- **Separation of concerns**: UI components focus on presentation; functional components handle behavior
+- **Reusability**: UI components can be reused in multiple functional contexts
+- **Maintainability**: Changes to UI components don't break functional implementation
+- **Developer experience**: Application developers have higher-level components available that implement common patterns
+
+## Component Documentation and Testing
+
+Each component in MDC is thoroughly documented and tested:
+
+### Storybook Integration
+
+- **Interactive Documentation**: Components are showcased in Storybook with interactive examples
+- **Controls**: Dynamic props can be adjusted in real-time to see how components respond
+- **Actions**: Component events are logged to make it easy to verify behavior
+- **Accessibility Testing**: A11y checks are built into the documentation
+
+### Automated Testing
+
+- **Unit Tests**: Test individual component functionality
+- **Visual Regression Tests**: Compare visual output against baselines
+- **Integration Tests**: Test component interactions
+- **Edge Case Tests**: Verify behavior under unusual conditions
+
+### Component Documentation
+
+- **Usage Examples**: Clear examples showing how to use components
+- **Props Documentation**: Detailed documentation of all component props
+- **API Reference**: Complete API reference for each component
+- **Design Patterns**: Guidance on component usage patterns
+
 ## Project Structure
 
 ```
@@ -52,8 +101,10 @@ mdc/
 ├── src/                  # Source code
 │   ├── assets/           # Images and other assets
 │   ├── components/       # React components
-│   │   └── ui/           # UI components (button, pagination, etc.)
+│   │   ├── ui/           # UI components (Level 1)
+│   │   └── functional/   # Functional components (Level 2)
 │   ├── lib/              # Utility functions and helpers
+│   ├── test/             # Test setup and helpers
 │   ├── App.tsx           # Main application component
 │   └── main.tsx          # Application entry point
 ├── .vercel/              # Vercel deployment configuration
@@ -90,6 +141,19 @@ npm run dev
 npm run storybook
 ```
 
+### Testing
+
+```bash
+# Run all tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
 ### Building
 
 ```bash
@@ -108,6 +172,9 @@ npm run build-storybook
 - `npm run preview` - Preview the production build locally
 - `npm run storybook` - Start Storybook for component development
 - `npm run build-storybook` - Build Storybook for deployment
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage reporting
 
 ## Component Structure
 
@@ -116,7 +183,15 @@ Components in this library follow a consistent structure:
 - Each UI component has its own directory or file in `src/components/ui/`
 - Component implementations are in `.tsx` files
 - Stories for Storybook documentation are in `.stories.tsx` files
-- Tests are integrated with Storybook for visual testing
+- Tests are integrated with Storybook for visual testing and in separate `.test.tsx` files
+
+Functional components are organized by type in `src/components/functional/`:
+
+- Each functional component type has its own directory
+- Each directory includes a README with usage examples
+- Complex functionality is broken down into multiple files
+- Types, utilities, and implementation are separated for clarity
+- Tests validate functionality and edge cases
 
 ## Deployment
 
