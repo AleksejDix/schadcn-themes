@@ -132,6 +132,38 @@ const CursorPaginationDemo: React.FC<CursorPaginationDemoProps> = ({
   );
 };
 
+/**
+ * Demo for showcasing all pagination variants
+ */
+const VariantsShowcase: React.FC = () => {
+  return (
+    <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
+      <div>
+        <p className="text-sm text-muted-foreground mb-6">
+          Use the Controls panel to customize the pagination properties and the
+          theme controls in the Storybook toolbar to switch themes.
+        </p>
+      </div>
+
+      <h3 className="text-lg font-medium mb-2">Default Cursor Pagination</h3>
+      <CursorPaginationDemo />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">With Missing Cursors</h3>
+      <CursorPaginationDemo missingCursors={true} />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">Disabled Pagination</h3>
+      <CursorPaginationDemo disabled={true} initialPage={3} />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">Many Pages</h3>
+      <CursorPaginationDemo
+        totalItems={200}
+        initialPage={8}
+        maxPageButtons={7}
+      />
+    </div>
+  );
+};
+
 // Meta for the cursor pagination component
 const meta = {
   title: "Functional/Pagination/Cursor",
@@ -178,7 +210,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story
+// Default story with controls in the Controls panel
 export const Default: Story = {
   args: {
     initialPage: 1,
@@ -190,23 +222,10 @@ export const Default: Story = {
   },
 };
 
-// With missing cursors
-export const WithMissingCursors: Story = {
-  args: {
-    initialPage: 1,
-    itemsPerPage: 10,
-    totalItems: 100,
-    maxPageButtons: 5,
-    missingCursors: true,
-  },
-};
-
-// Disabled story
-export const Disabled: Story = {
-  args: {
-    initialPage: 3,
-    itemsPerPage: ITEMS_PER_PAGE,
-    totalItems: TOTAL_ITEMS,
-    disabled: true,
+// Comprehensive showcase of all pagination variants
+export const Showcase: StoryObj = {
+  render: () => <VariantsShowcase />,
+  parameters: {
+    layout: "padded",
   },
 };

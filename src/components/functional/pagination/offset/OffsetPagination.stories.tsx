@@ -60,11 +60,18 @@ const OffsetPaginationDemo: React.FC<OffsetPaginationDemoProps> = ({
 };
 
 /**
- * Demo for showcasing component variants
+ * Demo for showcasing all pagination variants
  */
 const VariantsShowcase: React.FC = () => {
   return (
     <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
+      <div>
+        <p className="text-sm text-muted-foreground mb-6">
+          Use the Controls panel to customize the pagination properties and the
+          theme controls in the Storybook toolbar to switch themes.
+        </p>
+      </div>
+
       <h3 className="text-lg font-medium mb-2">Default Pagination</h3>
       <OffsetPaginationDemo />
 
@@ -132,7 +139,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story
+// Default story with controls in the Controls panel
 export const Default: Story = {
   args: {
     initialPage: 1,
@@ -143,28 +150,8 @@ export const Default: Story = {
   },
 };
 
-// Many pages story
-export const ManyPages: Story = {
-  args: {
-    initialPage: 5,
-    itemsPerPage: 10,
-    totalItems: 500,
-    maxPageButtons: 5,
-  },
-};
-
-// Disabled story
-export const Disabled: Story = {
-  args: {
-    initialPage: 3,
-    itemsPerPage: ITEMS_PER_PAGE,
-    totalItems: TOTAL_ITEMS,
-    disabled: true,
-  },
-};
-
-// Component variants showcase story
-export const VariantsShowcaseStory: StoryObj = {
+// Comprehensive showcase of all pagination variants
+export const Showcase: StoryObj = {
   render: () => <VariantsShowcase />,
   parameters: {
     layout: "padded",

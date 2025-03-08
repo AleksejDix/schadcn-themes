@@ -35,36 +35,34 @@ const meta = {
       options: ["default", "sm", "lg", "icon"],
       description: "The size of the button",
     },
+    children: {
+      control: "text",
+      description: "The button text",
+    },
+    disabled: {
+      control: "boolean",
+      description: "Whether the button is disabled",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS classes",
+    },
   },
 } satisfies Meta<typeof ThemedButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Basic stories
+// Basic story - theme will be controlled via Storybook toolbar
 export const Default: Story = {
   args: {
-    children: "Default Button",
+    children: "Button",
     variant: "default",
     size: "default",
   },
 };
 
-export const Destructive: Story = {
-  args: {
-    children: "Destructive Button",
-    variant: "destructive",
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    children: "Secondary Button",
-    variant: "secondary",
-  },
-};
-
-// Interactive showcase - shows buttons in the current theme from the toolbar
+// Showcase of all variants and sizes
 export const ButtonShowcase = () => {
   // Define button variants with proper typing
   const variants: ButtonVariant[] = [
@@ -78,6 +76,13 @@ export const ButtonShowcase = () => {
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
+      <div>
+        <p className="text-sm text-muted-foreground mb-6">
+          Use the theme controls in the Storybook toolbar to switch between
+          different brand themes and color modes.
+        </p>
+      </div>
+
       <div className="flex flex-col gap-6">
         {/* Main button variants */}
         <div>
@@ -91,34 +96,6 @@ export const ButtonShowcase = () => {
           </div>
         </div>
 
-        {/* Highlight destructive button */}
-        <div>
-          <h3 className="text-lg font-medium mb-4">
-            Destructive Buttons (Danger Actions)
-          </h3>
-          <div className="flex flex-col gap-4">
-            <div className="p-4 border border-destructive/20 rounded-md bg-destructive/5">
-              <p className="text-sm mb-4">
-                Destructive buttons indicate dangerous actions:
-              </p>
-              <div className="flex gap-4">
-                <ThemedButton variant="destructive">
-                  Delete Account
-                </ThemedButton>
-                <ThemedButton variant="destructive" size="sm">
-                  Remove
-                </ThemedButton>
-                <ThemedButton
-                  variant="outline"
-                  className="text-destructive border-destructive"
-                >
-                  Cancel
-                </ThemedButton>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Button sizes */}
         <div>
           <h3 className="text-lg font-medium mb-4">Button Sizes</h3>
@@ -127,6 +104,28 @@ export const ButtonShowcase = () => {
             <ThemedButton>Default</ThemedButton>
             <ThemedButton size="lg">Large</ThemedButton>
             <ThemedButton size="icon">🔔</ThemedButton>
+          </div>
+        </div>
+
+        {/* Destructive buttons */}
+        <div>
+          <h3 className="text-lg font-medium mb-4">Destructive Buttons</h3>
+          <div className="p-4 border border-destructive/20 rounded-md bg-destructive/5">
+            <p className="text-sm mb-4">
+              Destructive buttons indicate dangerous actions:
+            </p>
+            <div className="flex gap-4">
+              <ThemedButton variant="destructive">Delete Account</ThemedButton>
+              <ThemedButton variant="destructive" size="sm">
+                Remove
+              </ThemedButton>
+              <ThemedButton
+                variant="outline"
+                className="text-destructive border-destructive"
+              >
+                Cancel
+              </ThemedButton>
+            </div>
           </div>
         </div>
       </div>
