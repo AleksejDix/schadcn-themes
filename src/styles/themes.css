@@ -1,0 +1,293 @@
+/* 
+ * Custom brand themes using data attributes
+ * Base variables are defined in index.css
+ * This file contains component-specific variables and brand-specific themes
+ */
+
+/* Component-specific variables for all components - default light mode */
+:root {
+  /* Pagination component variables */
+  --pagination-radius: var(--radius);
+  --pagination-gap: 0.25rem;
+  --pagination-item-size: 2.25rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 5rem;
+
+  /* Button component variables */
+  --button-radius: var(--radius);
+  --button-font-size: 0.875rem;
+  --button-height: 2.25rem;
+  --button-padding-x: 1rem;
+}
+
+/* 
+ * Dark mode - uses the dark class from Tailwind
+ * Apply this using dark mode in the theme provider
+ */
+.dark {
+  /* Default dark theme colors from index.css */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+}
+
+/* ======================================================= */
+/* Coca-Cola Theme - Light Mode */
+/* ======================================================= */
+[data-brand="cocacola"] {
+  /* Brand colors */
+  --primary: oklch(0.53 0.23 27); /* Coca-Cola red */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0.03 27);
+  --secondary-foreground: oklch(0.53 0.23 27);
+
+  --accent: oklch(0.96 0.03 27);
+  --accent-foreground: oklch(0.53 0.23 27);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.53 0.23 27);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.53 0.23 27);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.53 0.23 27);
+
+  --muted: oklch(0.92 0.05 27);
+  --muted-foreground: oklch(0.65 0.05 27);
+
+  --border: oklch(0.9 0.01 27);
+  --input: oklch(0.9 0.01 27);
+  --ring: oklch(0.53 0.23 27);
+
+  /* Destructive button - darker red that fits the Coca-Cola palette */
+  --destructive: oklch(0.4 0.25 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Component-specific variables */
+  --pagination-radius: 0.25rem;
+  --pagination-gap: 0.15rem;
+  --pagination-item-size: 2rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 4.5rem;
+
+  --button-radius: 0.25rem;
+  --button-font-size: 0.8125rem;
+  --button-height: 2.125rem;
+  --button-padding-x: 0.875rem;
+}
+
+/* Coca-Cola Theme - Dark Mode */
+[data-brand="cocacola"][data-mode="dark"],
+.dark [data-brand="cocacola"] {
+  /* Brand colors - dark variant */
+  --primary: oklch(0.53 0.23 27); /* Coca-Cola red */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.4 0.1 27);
+  --secondary-foreground: oklch(0.96 0.03 27);
+
+  --accent: oklch(0.3 0.08 27);
+  --accent-foreground: oklch(0.96 0.03 27);
+
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(0.96 0.03 27);
+
+  --card: oklch(0.2 0 0);
+  --card-foreground: oklch(0.96 0.03 27);
+
+  --popover: oklch(0.2 0 0);
+  --popover-foreground: oklch(0.96 0.03 27);
+
+  --muted: oklch(0.25 0.03 27);
+  --muted-foreground: oklch(0.7 0.05 27);
+
+  --border: oklch(0.3 0.05 27);
+  --input: oklch(0.25 0.03 27);
+  --ring: oklch(0.53 0.23 27);
+
+  /* Destructive button - intense red on dark background */
+  --destructive: oklch(0.45 0.28 27);
+  --destructive-foreground: oklch(1 0 0);
+}
+
+/* ======================================================= */
+/* Rolex Theme - Light Mode */
+/* ======================================================= */
+[data-brand="rolex"] {
+  /* Brand colors */
+  --primary: oklch(0.4 0.1 125); /* Rolex green */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.75 0.08 90); /* Rolex gold */
+  --secondary-foreground: oklch(0.2 0.03 125);
+
+  --accent: oklch(0.55 0.05 125); /* Light green accent */
+  --accent-foreground: oklch(0.15 0.02 125);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.03 125); /* Dark green-gray */
+
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.2 0.03 125);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 125);
+
+  --muted: oklch(0.95 0.01 125); /* Light muted green */
+  --muted-foreground: oklch(0.5 0.05 125);
+
+  --border: oklch(0.85 0.05 90); /* Subtle gold border */
+  --input: oklch(0.95 0.01 0);
+  --ring: oklch(0.4 0.1 125); /* Green ring/focus */
+
+  /* Destructive button - elegant dark red */
+  --destructive: oklch(0.4 0.2 30);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Component-specific variables */
+  --pagination-radius: 0.125rem; /* More square, elegant corners */
+  --pagination-gap: 0.25rem;
+  --pagination-item-size: 2.25rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 5.5rem;
+
+  /* Button component variables */
+  --button-radius: 0.125rem; /* Squared corners for luxury feel */
+  --button-font-size: 0.875rem;
+  --button-height: 2.5rem;
+  --button-padding-x: 1.25rem;
+}
+
+/* Rolex Theme - Dark Mode */
+[data-brand="rolex"][data-mode="dark"],
+.dark [data-brand="rolex"] {
+  /* Brand colors - dark variant */
+  --primary: oklch(0.36 0.11 125); /* Deeper Rolex green */
+  --primary-foreground: oklch(0.95 0 0);
+
+  --secondary: oklch(0.65 0.1 90); /* Deeper gold */
+  --secondary-foreground: oklch(0.95 0 0);
+
+  --accent: oklch(0.25 0.07 125);
+  --accent-foreground: oklch(0.95 0 0);
+
+  --background: oklch(0.12 0.01 125); /* Very dark green tinted background */
+  --foreground: oklch(0.95 0 0);
+
+  --card: oklch(0.15 0.02 125);
+  --card-foreground: oklch(0.95 0 0);
+
+  --popover: oklch(0.15 0.02 125);
+  --popover-foreground: oklch(0.95 0 0);
+
+  --muted: oklch(0.2 0.04 125);
+  --muted-foreground: oklch(0.7 0.05 125);
+
+  --border: oklch(0.55 0.1 90); /* Gold-tinted border */
+  --input: oklch(0.2 0.04 125);
+  --ring: oklch(0.45 0.15 125);
+
+  /* Destructive button - rich dark red */
+  --destructive: oklch(0.5 0.25 25);
+  --destructive-foreground: oklch(1 0 0);
+}
+
+/* ======================================================= */
+/* Medidata Theme - Light Mode */
+/* ======================================================= */
+[data-brand="medidata"] {
+  /* Brand colors */
+  --primary: oklch(0.55 0.2 265); /* Medidata purple */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.7 0.15 235); /* Medidata blue */
+  --secondary-foreground: oklch(1 0 0);
+
+  --accent: oklch(0.9 0.05 265); /* Light purple accent */
+  --accent-foreground: oklch(0.2 0.05 265);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.03 265); /* Dark purple-gray */
+
+  --card: oklch(0.99 0 0);
+  --card-foreground: oklch(0.2 0.03 265);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 265);
+
+  --muted: oklch(0.95 0.03 265); /* Light muted purple */
+  --muted-foreground: oklch(0.5 0.08 265);
+
+  --border: oklch(0.9 0.06 265);
+  --input: oklch(0.95 0.01 0);
+  --ring: oklch(0.5 0.2 265); /* Purple ring/focus */
+
+  /* Destructive button */
+  --destructive: oklch(0.55 0.25 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* Component-specific variables */
+  --pagination-radius: 0.375rem;
+  --pagination-gap: 0.25rem;
+  --pagination-item-size: 2.25rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 5rem;
+
+  /* Button component variables */
+  --button-radius: 0.375rem;
+  --button-font-size: 0.875rem;
+  --button-height: 2.375rem;
+  --button-padding-x: 1rem;
+}
+
+/* Medidata Theme - Dark Mode */
+[data-brand="medidata"][data-mode="dark"],
+.dark [data-brand="medidata"] {
+  /* Brand colors - dark variant */
+  --primary: oklch(0.5 0.22 265); /* Deeper Medidata purple */
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.6 0.18 235); /* Deeper blue */
+  --secondary-foreground: oklch(1 0 0);
+
+  --accent: oklch(0.3 0.1 265);
+  --accent-foreground: oklch(0.97 0 0);
+
+  --background: oklch(0.12 0.03 265); /* Very dark purple tinted background */
+  --foreground: oklch(0.97 0 0);
+
+  --card: oklch(0.15 0.05 265);
+  --card-foreground: oklch(0.97 0 0);
+
+  --popover: oklch(0.15 0.05 265);
+  --popover-foreground: oklch(0.97 0 0);
+
+  --muted: oklch(0.2 0.08 265);
+  --muted-foreground: oklch(0.7 0.1 265);
+
+  --border: oklch(0.25 0.1 265);
+  --input: oklch(0.2 0.08 265);
+  --ring: oklch(0.5 0.22 265);
+
+  /* Destructive button */
+  --destructive: oklch(0.6 0.28 25);
+  --destructive-foreground: oklch(1 0 0);
+}

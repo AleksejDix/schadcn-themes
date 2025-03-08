@@ -59,6 +59,38 @@ const OffsetPaginationDemo: React.FC<OffsetPaginationDemoProps> = ({
   );
 };
 
+/**
+ * Demo for showcasing component variants
+ */
+const VariantsShowcase: React.FC = () => {
+  return (
+    <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
+      <h3 className="text-lg font-medium mb-2">Default Pagination</h3>
+      <OffsetPaginationDemo />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">
+        Pagination with Many Pages
+      </h3>
+      <OffsetPaginationDemo initialPage={5} totalItems={500} />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">Disabled Pagination</h3>
+      <OffsetPaginationDemo disabled={true} />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">
+        Few Items (Small Pagination)
+      </h3>
+      <OffsetPaginationDemo totalItems={25} itemsPerPage={5} />
+
+      <h3 className="text-lg font-medium mt-6 mb-2">More Buttons</h3>
+      <OffsetPaginationDemo
+        maxPageButtons={7}
+        initialPage={4}
+        totalItems={200}
+      />
+    </div>
+  );
+};
+
 // Meta for the offset pagination component
 const meta = {
   title: "Functional/Pagination/Offset",
@@ -128,5 +160,13 @@ export const Disabled: Story = {
     itemsPerPage: ITEMS_PER_PAGE,
     totalItems: TOTAL_ITEMS,
     disabled: true,
+  },
+};
+
+// Component variants showcase story
+export const VariantsShowcaseStory: StoryObj = {
+  render: () => <VariantsShowcase />,
+  parameters: {
+    layout: "padded",
   },
 };

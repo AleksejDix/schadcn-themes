@@ -4,12 +4,23 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
   PaginationEllipsis,
-} from "@/components/ui/pagination";
+} from "@/components/themed-pagination";
+import {
+  ThemedPaginationPrevious,
+  ThemedPaginationNext,
+} from "@/components/themed-pagination";
 import { OffsetPaginationProps, PaginationChangeData } from "../types";
 import { calculateTotalPages, getPageNumbers } from "../utils";
+import { ThemeProps } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
+
+/**
+ * Extended props interface with theme support
+ */
+export interface ThemedOffsetPaginationProps extends OffsetPaginationProps {
+  theme?: ThemeProps;
+}
 
 /**
  * OffsetPagination - A higher-level pagination component that implements
@@ -23,7 +34,8 @@ export function OffsetPagination({
   className,
   onPageChange,
   disabled = false,
-}: OffsetPaginationProps) {
+  theme,
+}: ThemedOffsetPaginationProps) {
   // Calculate total pages
   const totalPages = calculateTotalPages(totalItems, itemsPerPage);
 
@@ -44,15 +56,27 @@ export function OffsetPagination({
     onPageChange(data);
   };
 
+  // Apply theme via data attributes if provided
+  const dataAttributes: Record<string, string> = {};
+
+  if (theme?.brand && theme.brand !== "default") {
+    dataAttributes["data-brand"] = theme.brand;
+  }
+
+  if (theme?.mode === "dark") {
+    dataAttributes["data-mode"] = theme.mode;
+  }
+
   return (
     <Pagination
-      className={className}
+      className={cn(className)}
       aria-label={`Showing page ${currentPage} of ${totalPages}`}
+      {...dataAttributes}
     >
       <PaginationContent>
         {/* Previous page button */}
         <PaginationItem>
-          <PaginationPrevious
+          <ThemedPaginationPrevious
             onClick={() => handlePageChange(currentPage - 1)}
             tabIndex={currentPage <= 1 || disabled ? -1 : 0}
             aria-disabled={currentPage <= 1 || disabled}
@@ -95,7 +119,7 @@ export function OffsetPagination({
 
         {/* Next page button */}
         <PaginationItem>
-          <PaginationNext
+          <ThemedPaginationNext
             onClick={() => handlePageChange(currentPage + 1)}
             tabIndex={currentPage >= totalPages || disabled ? -1 : 0}
             aria-disabled={currentPage >= totalPages || disabled}
