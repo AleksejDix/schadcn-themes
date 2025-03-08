@@ -1,0 +1,87 @@
+/* 
+ * Rolex Theme 
+ * Contains variables for Rolex brand styling
+ */
+
+/* ======================================================= */
+/* Rolex Theme - Light Mode */
+/* ======================================================= */
+[data-brand="rolex"] {
+  /* Brand colors using Tailwind's color palette */
+  --primary: theme("colors.emerald.700"); /* Rolex green */
+  --primary-foreground: theme("colors.white");
+
+  --secondary: theme("colors.amber.300"); /* Rolex gold */
+  --secondary-foreground: theme("colors.emerald.900");
+
+  --accent: theme("colors.emerald.400"); /* Light green accent */
+  --accent-foreground: theme("colors.emerald.950");
+
+  --background: theme("colors.white");
+  --foreground: theme("colors.emerald.900"); /* Dark green-gray */
+
+  --card: theme("colors.gray.50");
+  --card-foreground: theme("colors.emerald.900");
+
+  --popover: theme("colors.white");
+  --popover-foreground: theme("colors.emerald.900");
+
+  --muted: theme("colors.emerald.50"); /* Light muted green */
+  --muted-foreground: theme("colors.emerald.600");
+
+  --border: theme("colors.amber.200"); /* Subtle gold border */
+  --input: theme("colors.gray.100");
+  --ring: theme("colors.emerald.700"); /* Green ring/focus */
+
+  /* Destructive button - elegant dark red */
+  --destructive: theme("colors.red.800");
+  --destructive-foreground: theme("colors.white");
+
+  /* Component-specific variables */
+  --pagination-radius: 0.125rem; /* More square, elegant corners */
+  --pagination-gap: 0.25rem;
+  --pagination-item-size: 2.25rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 5.5rem;
+
+  --button-radius: 0.125rem; /* Squared corners for luxury feel */
+  --button-font-size: 0.875rem;
+  --button-height: 2.5rem;
+  --button-padding-x: 1.25rem;
+}
+
+/* Rolex Theme - Dark Mode */
+[data-brand="rolex"][data-mode="dark"],
+.dark [data-brand="rolex"] {
+  /* Brand colors - dark variant using Tailwind's color palette */
+  --primary: theme("colors.emerald.600"); /* Deeper Rolex green */
+  --primary-foreground: theme("colors.gray.50");
+
+  --secondary: theme("colors.amber.400"); /* Deeper gold */
+  --secondary-foreground: theme("colors.gray.50");
+
+  --accent: theme("colors.emerald.900");
+  --accent-foreground: theme("colors.gray.50");
+
+  --background: theme(
+    "colors.emerald.950"
+  ); /* Very dark green tinted background */
+  --foreground: theme("colors.gray.50");
+
+  --card: theme("colors.emerald.900");
+  --card-foreground: theme("colors.gray.50");
+
+  --popover: theme("colors.emerald.900");
+  --popover-foreground: theme("colors.gray.50");
+
+  --muted: theme("colors.emerald.800");
+  --muted-foreground: theme("colors.emerald.400");
+
+  --border: theme("colors.amber.700"); /* Gold-tinted border */
+  --input: theme("colors.emerald.800");
+  --ring: theme("colors.emerald.500");
+
+  /* Destructive button - rich dark red */
+  --destructive: theme("colors.red.700");
+  --destructive-foreground: theme("colors.white");
+}

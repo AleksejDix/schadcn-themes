@@ -1,0 +1,12 @@
+/* 
+ * Theme system index file
+ * Imports all theme files
+ */
+
+/* Default theme (contains base variables) */
+@import "./default.css";
+
+/* Brand themes */
+@import "./cocacola.css";
+@import "./rolex.css";
+@import "./medidata.css";

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
 import { ThemedButton } from "./themed-button";
 
 // Define the button variants type to avoid TypeScript errors

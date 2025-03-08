@@ -1,0 +1,88 @@
+/* 
+ * Medidata Theme 
+ * Contains variables for Medidata brand styling
+ */
+
+/* ======================================================= */
+/* Medidata Theme - Light Mode */
+/* ======================================================= */
+[data-brand="medidata"] {
+  /* Brand colors using Tailwind's color palette */
+  --primary: theme("colors.purple.600"); /* Medidata purple */
+  --primary-foreground: theme("colors.white");
+
+  --secondary: theme("colors.indigo.500"); /* Medidata blue */
+  --secondary-foreground: theme("colors.white");
+
+  --accent: theme("colors.purple.100"); /* Light purple accent */
+  --accent-foreground: theme("colors.purple.900");
+
+  --background: theme("colors.white");
+  --foreground: theme("colors.purple.900"); /* Dark purple-gray */
+
+  --card: theme("colors.gray.50");
+  --card-foreground: theme("colors.purple.900");
+
+  --popover: theme("colors.white");
+  --popover-foreground: theme("colors.purple.900");
+
+  --muted: theme("colors.purple.50"); /* Light muted purple */
+  --muted-foreground: theme("colors.purple.500");
+
+  --border: theme("colors.purple.100");
+  --input: theme("colors.gray.100");
+  --ring: theme("colors.purple.500"); /* Purple ring/focus */
+
+  /* Destructive button */
+  --destructive: theme("colors.red.600");
+  --destructive-foreground: theme("colors.white");
+
+  /* Component-specific variables */
+  --pagination-radius: 0.375rem;
+  --pagination-gap: 0.25rem;
+  --pagination-item-size: 2.25rem;
+  --pagination-font-size: 0.875rem;
+  --pagination-nav-min-width: 5rem;
+
+  /* Button component variables */
+  --button-radius: 0.375rem;
+  --button-font-size: 0.875rem;
+  --button-height: 2.375rem;
+  --button-padding-x: 1rem;
+}
+
+/* Medidata Theme - Dark Mode */
+[data-brand="medidata"][data-mode="dark"],
+.dark [data-brand="medidata"] {
+  /* Brand colors - dark variant using Tailwind's color palette */
+  --primary: theme("colors.purple.500"); /* Deeper Medidata purple */
+  --primary-foreground: theme("colors.white");
+
+  --secondary: theme("colors.indigo.400"); /* Deeper blue */
+  --secondary-foreground: theme("colors.white");
+
+  --accent: theme("colors.purple.800");
+  --accent-foreground: theme("colors.gray.50");
+
+  --background: theme(
+    "colors.purple.950"
+  ); /* Very dark purple tinted background */
+  --foreground: theme("colors.gray.50");
+
+  --card: theme("colors.purple.900");
+  --card-foreground: theme("colors.gray.50");
+
+  --popover: theme("colors.purple.900");
+  --popover-foreground: theme("colors.gray.50");
+
+  --muted: theme("colors.purple.800");
+  --muted-foreground: theme("colors.purple.300");
+
+  --border: theme("colors.purple.700");
+  --input: theme("colors.purple.800");
+  --ring: theme("colors.purple.400");
+
+  /* Destructive button */
+  --destructive: theme("colors.red.500");
+  --destructive-foreground: theme("colors.white");
+}
