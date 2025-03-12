@@ -100,7 +100,7 @@ const VariantsShowcase: React.FC = () => {
 
 // Meta for the offset pagination component
 const meta = {
-  title: "Functional/Pagination/Offset",
+  title: "Molecules/Pagination/Offset",
   component: OffsetPaginationDemo,
   tags: ["autodocs"],
   parameters: {

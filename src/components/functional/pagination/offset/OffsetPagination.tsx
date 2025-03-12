@@ -1,15 +1,13 @@
-import React from "react";
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationLink,
   PaginationEllipsis,
-} from "@/components/themed-pagination";
-import {
-  ThemedPaginationPrevious,
-  ThemedPaginationNext,
-} from "@/components/themed-pagination";
+  PaginationPrevious,
+  PaginationNext,
+} from "@/components/ui/pagination";
+
 import { OffsetPaginationProps, PaginationChangeData } from "../types";
 import { calculateTotalPages, getPageNumbers } from "../utils";
 import { ThemeProps } from "@/components/ThemeProvider";
@@ -76,7 +74,7 @@ export function OffsetPagination({
       <PaginationContent>
         {/* Previous page button */}
         <PaginationItem>
-          <ThemedPaginationPrevious
+          <PaginationPrevious
             onClick={() => handlePageChange(currentPage - 1)}
             tabIndex={currentPage <= 1 || disabled ? -1 : 0}
             aria-disabled={currentPage <= 1 || disabled}
@@ -119,7 +117,7 @@ export function OffsetPagination({
 
         {/* Next page button */}
         <PaginationItem>
-          <ThemedPaginationNext
+          <PaginationNext
             onClick={() => handlePageChange(currentPage + 1)}
             tabIndex={currentPage >= totalPages || disabled ? -1 : 0}
             aria-disabled={currentPage >= totalPages || disabled}

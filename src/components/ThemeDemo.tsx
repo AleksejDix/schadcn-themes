@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ThemeProvider, { BrandTheme, ColorMode } from "./ThemeProvider";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { ThemedButton } from "./themed-button";
+import { ThemedButton } from "./mdc-ui/button/button";
 
 /**
  * ThemeDemo - Example of using ThemeProvider and ThemeSwitcher in an application

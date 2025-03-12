@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ThemedButton } from "./themed-button";
+import { ThemedButton } from "./button";
 
 // Define the button variants type to avoid TypeScript errors
 type ButtonVariant =
@@ -11,7 +11,7 @@ type ButtonVariant =
   | "link";
 
 const meta = {
-  title: "Components/ThemedButton",
+  title: "Atoms/Button",
   component: ThemedButton,
   parameters: {
     layout: "centered",
