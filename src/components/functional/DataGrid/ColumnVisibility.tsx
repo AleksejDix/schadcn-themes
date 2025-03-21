@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Columns, RotateCcw } from "lucide-react";
 
-export const ColumnsToggler = () => {
+export const ColumnVisibility = () => {
   const { tableInstance } = useDataGrid();
 
   if (!tableInstance) {

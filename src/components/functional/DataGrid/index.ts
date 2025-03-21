@@ -1,4 +1,12 @@
-export * from "./types";
+// Main components
+export { DataGrid } from "./DataGrid";
+export { DataTable } from "./DataTable";
 
-// Export composite table components
-export { CompositeTable, TableColumn, TableRow } from "./DataGrid";
+// Types
+export { type RowData, useDataGrid } from "./DataGrid.types";
+
+// Row model for headless rendering
+export { RowModel, RowModelSimple } from "./components/RowModel";
+
+// Table components
+export * from "./components/table";

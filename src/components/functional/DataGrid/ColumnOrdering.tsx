@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export const ColumnsOrderer = () => {
+export const ColumnOrdering = () => {
   const { tableInstance } = useDataGrid();
   // Local state to track column order so we can update the UI immediately
   const [localColumnOrder, setLocalColumnOrder] = useState<string[]>([]);

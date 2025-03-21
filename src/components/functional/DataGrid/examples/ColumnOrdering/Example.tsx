@@ -1,7 +1,7 @@
 import { DataGrid } from "../../DataGrid";
 import { type ColumnDef } from "@tanstack/react-table";
 import { type RowData } from "../../DataGrid.types";
-import { ColumnsToggler } from "../../ColumnsToggler";
+import { ColumnOrdering } from "../../ColumnOrdering";
 import { DataTable } from "../../DataTable";
 // Extend the RowData type to ensure compatibility with DataGrid
 interface User extends RowData {
@@ -83,7 +83,7 @@ export const Example = () => {
 
   return (
     <DataGrid columns={columns} data={users}>
-      <ColumnsToggler />
+      <ColumnOrdering />
       <DataTable />
     </DataGrid>
   );
