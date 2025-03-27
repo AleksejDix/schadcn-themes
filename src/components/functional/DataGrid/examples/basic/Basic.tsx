@@ -1,13 +1,10 @@
 import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { DataGrid } from "../../DataGrid";
 import { Table } from "@/components/ui/table";
-import { TableHeader } from "../../components/TableHeader";
-import { TableBody } from "../../components/TableBody";
-import { TableRows } from "../../components/TableRows";
-import { TableFooter } from "../../components/TableFooter";
-import { ColumnVisibility } from "../../ColumnVisibility";
+import { HeaderGroups } from "../../components/HeaderGroups";
+import { FooterGroups } from "../../components/TableFooter";
+import { RowModel } from "../../components/TableRows";
 import { type RowData } from "../../DataGrid.types";
-import { TableCell } from "@/components/ui/table";
 
 type Person = RowData & {
   firstName: string;
@@ -52,32 +49,22 @@ const columnHelper = createColumnHelper<Person>();
 
 const columns = [
   columnHelper.accessor("firstName", {
-    cell: (info) => info.getValue(),
-    header: () => <span>First Name</span>,
-    footer: (info) => info.column.id,
+    header: "First name",
   }),
   columnHelper.accessor((row) => row.lastName, {
-    id: "lastName",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Last Name</span>,
-    footer: (info) => info.column.id,
+    header: "Last name",
   }),
   columnHelper.accessor("age", {
-    header: () => "Age",
-    cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
+    header: "Age",
   }),
   columnHelper.accessor("visits", {
-    header: () => <span>Visits</span>,
-    footer: (info) => info.column.id,
+    header: "Visits",
   }),
   columnHelper.accessor("status", {
     header: "Status",
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor("progress", {
     header: "Profile Progress",
-    footer: (info) => info.column.id,
   }),
 ];
 
@@ -85,15 +72,10 @@ export const Basic = () => {
   return (
     <div className="space-y-4">
       <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
-        <div className="flex justify-end">
-          <ColumnVisibility />
-        </div>
         <Table>
-          <TableHeader />
-          <TableBody>
-            <TableRows />
-          </TableBody>
-          <TableFooter />
+          <HeaderGroups />
+          <RowModel />
+          <FooterGroups />
         </Table>
       </DataGrid>
     </div>

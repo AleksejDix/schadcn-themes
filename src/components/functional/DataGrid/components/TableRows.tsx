@@ -1,24 +1,21 @@
 import { ReactNode } from "react";
 import { type Row, flexRender } from "@tanstack/react-table";
 import { useDataGrid, type RowData } from "../DataGrid.types";
-import {
-  TableRow as PrimitiveTableRow,
-  TableCell,
-} from "@/components/ui/table";
+import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-type TableRowsProps = {
+type RowModelProps = {
   children?: (row: Row<RowData>) => ReactNode;
 };
 
-export function TableRows({ children }: TableRowsProps) {
+export function RowModel({ children }: RowModelProps) {
   const { tableInstance } = useDataGrid();
 
   if (!tableInstance) return null;
 
   return (
-    <>
+    <TableBody>
       {tableInstance.getRowModel().rows.map((row) => (
-        <PrimitiveTableRow key={row.id}>
+        <TableRow key={row.id}>
           {children
             ? children(row)
             : row
@@ -28,8 +25,8 @@ export function TableRows({ children }: TableRowsProps) {
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-        </PrimitiveTableRow>
+        </TableRow>
       ))}
-    </>
+    </TableBody>
   );
 }

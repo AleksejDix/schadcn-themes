@@ -1,19 +1,16 @@
 import { flexRender } from "@tanstack/react-table";
 import { useDataGrid } from "../DataGrid.types";
-import {
-  TableFooter as PrimitiveTableFooter,
-  TableCell,
-} from "@/components/ui/table";
+import { TableFooter, TableRow, TableCell } from "@/components/ui/table";
 
-export function TableFooter() {
+export function FooterGroups() {
   const { tableInstance } = useDataGrid();
 
   if (!tableInstance) return null;
 
   return (
-    <PrimitiveTableFooter>
+    <TableFooter>
       {tableInstance.getFooterGroups().map((footerGroup) => (
-        <tr key={footerGroup.id}>
+        <TableRow key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
             <TableCell key={header.id} colSpan={header.colSpan}>
               {header.isPlaceholder
@@ -24,8 +21,8 @@ export function TableFooter() {
                   )}
             </TableCell>
           ))}
-        </tr>
+        </TableRow>
       ))}
-    </PrimitiveTableFooter>
+    </TableFooter>
   );
 }

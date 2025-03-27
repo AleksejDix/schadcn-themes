@@ -2,7 +2,7 @@ import { DataGrid } from "../../DataGrid";
 import { type ColumnDef } from "@tanstack/react-table";
 import { type RowData } from "../../DataGrid.types";
 import { TableRows } from "../../components/TableRows";
-import { TableHeader } from "../../components/TableHeader";
+import { TableHeader } from "../../components/HeaderGroups";
 import { Table, TableBody } from "@/components/ui/table";
 import { ColumnVisibility } from "../../ColumnVisibility";
 
