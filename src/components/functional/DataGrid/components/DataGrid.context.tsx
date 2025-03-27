@@ -4,6 +4,7 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   VisibilityState,
+  ColumnResizeMode,
 } from "@tanstack/react-table";
 import {
   DataGridContext,
@@ -22,16 +23,26 @@ export const DataGridContextProvider: React.FC<
 > = ({ children, columns, data }) => {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
+  const [columnResizeMode] = React.useState<ColumnResizeMode>("onChange");
+
+  // Enable resizing for all columns by default
+  const columnsWithResizing = React.useMemo(() => {
+    return columns.map((column) => ({
+      ...column,
+      enableResizing: true,
+    }));
+  }, [columns]);
 
   const tableInstance = useReactTable({
-    columns,
+    columns: columnsWithResizing,
     data,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    columnResizeMode,
+    enableColumnResizing: true,
     defaultColumn: {
-      size: 150, // Default column width
-      minSize: 40, // Minimum column width
+      enableResizing: true,
     },
     state: {
       columnVisibility,

@@ -13,7 +13,6 @@ export function HeaderGroups() {
           {headerGroup.headers.map((header) => (
             <TableHead
               key={header.id}
-              className="border border-red-500"
               colSpan={header.colSpan}
               scope="col"
               style={{ width: header.getSize() }}

@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { type Row, flexRender } from "@tanstack/react-table";
 import { useDataGrid, type RowData } from "./DataGrid.types";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
 type RowModelProps = {
   children?: (row: Row<RowData>) => ReactNode;
@@ -15,13 +16,29 @@ export function RowModel({ children }: RowModelProps) {
   return (
     <TableBody>
       {tableInstance.getRowModel().rows.map((row) => (
-        <TableRow key={row.id}>
+        <TableRow
+          key={row.id}
+          className={cn(
+            row.getIsSelected() &&
+              "outline-2 -outline-offset-[1px] outline-blue-600",
+            "relative"
+          )}
+          role="row"
+          aria-selected={row.getIsSelected()}
+          tabIndex={-1}
+          onClick={() => row.toggleSelected(!row.getIsSelected())}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              row.toggleSelected(!row.getIsSelected());
+            }
+          }}
+        >
           {children
             ? children(row)
             : row.getVisibleCells().map((cell) => (
                 <TableCell
                   key={cell.id}
-                  className="border border-green-500"
                   style={{ width: cell.column.getSize() }}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
