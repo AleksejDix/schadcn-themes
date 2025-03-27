@@ -1,5 +1,5 @@
 import { flexRender } from "@tanstack/react-table";
-import { TableRow, TableHead } from "@/components/ui/table";
+import { TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import { useDataGrid } from "../DataGrid.types";
 
 export function HeaderGroups() {
@@ -7,7 +7,7 @@ export function HeaderGroups() {
   if (!tableInstance) return null;
 
   return (
-    <>
+    <TableHeader>
       {tableInstance.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => (
@@ -22,6 +22,6 @@ export function HeaderGroups() {
           ))}
         </TableRow>
       ))}
-    </>
+    </TableHeader>
   );
 }
