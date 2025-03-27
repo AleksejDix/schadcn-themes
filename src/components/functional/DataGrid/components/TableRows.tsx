@@ -44,14 +44,15 @@ export function TableRows({ children }: TableRowsProps) {
     <>
       {rows.map((row) => (
         <PrimitiveTableRow key={row.id}>
-          {children?.(row) ??
-            row
-              .getVisibleCells()
-              .map((cell) => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
+          {children
+            ? children(row)
+            : row
+                .getVisibleCells()
+                .map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
         </PrimitiveTableRow>
       ))}
     </>

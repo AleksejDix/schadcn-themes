@@ -1,117 +1,101 @@
+import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { DataGrid } from "../../DataGrid";
-import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
+import { Table } from "@/components/ui/table";
+import { TableHeader } from "../../components/TableHeader";
+import { TableBody } from "../../components/TableBody";
+import { TableRows } from "../../components/TableRows";
+import { TableFooter } from "../../components/TableFooter";
+import { ColumnVisibility } from "../../ColumnVisibility";
 import { type RowData } from "../../DataGrid.types";
-import { createEmailCell } from "../../components/cells/Email";
-import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "@/components/ui/table";
-// Extend the RowData type to ensure compatibility with DataGrid
-interface User extends RowData {
-  name: string;
-  email: string;
-  role: string;
-  status: "active" | "inactive";
-  lastLogin: string;
-}
+import { TableCell } from "@/components/ui/table";
+
+type Person = RowData & {
+  firstName: string;
+  lastName: string;
+  age: number;
+  visits: number;
+  status: string;
+  progress: number;
+};
+
+const defaultData: Person[] = [
+  {
+    id: 1,
+    firstName: "tanner",
+    lastName: "linsley",
+    age: 24,
+    visits: 100,
+    status: "In Relationship",
+    progress: 50,
+  },
+  {
+    id: 2,
+    firstName: "tandy",
+    lastName: "miller",
+    age: 40,
+    visits: 40,
+    status: "Single",
+    progress: 80,
+  },
+  {
+    id: 3,
+    firstName: "joe",
+    lastName: "dirte",
+    age: 45,
+    visits: 20,
+    status: "Complicated",
+    progress: 10,
+  },
+];
+
+const columnHelper = createColumnHelper<Person>();
+
+const columns = [
+  columnHelper.accessor("firstName", {
+    cell: (info) => info.getValue(),
+    header: () => <span>First Name</span>,
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor((row) => row.lastName, {
+    id: "lastName",
+    cell: (info) => <i>{info.getValue()}</i>,
+    header: () => <span>Last Name</span>,
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("age", {
+    header: () => "Age",
+    cell: (info) => info.renderValue(),
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("visits", {
+    header: () => <span>Visits</span>,
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("status", {
+    header: "Status",
+    footer: (info) => info.column.id,
+  }),
+  columnHelper.accessor("progress", {
+    header: "Profile Progress",
+    footer: (info) => info.column.id,
+  }),
+];
 
 export const Basic = () => {
-  // Create type-safe cell renderers
-  const renderEmailCell = createEmailCell();
-
-  const columnHelper = createColumnHelper<User>();
-
-  // Column definitions for the user management grid
-  const columns = [
-    {
-      accessorKey: "name",
-      header: "Name",
-    },
-    {
-      accessorKey: "email",
-      header: "Email",
-      cell: renderEmailCell,
-    },
-    {
-      accessorKey: "role",
-      header: "Role",
-    },
-    {
-      accessorKey: "status",
-      header: "Status",
-    },
-    columnHelper.accessor("lastLogin", {
-      header: "Last Login",
-    }),
-  ] as ColumnDef<User>[];
-
-  // Sample user data
-  const users: User[] = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      role: "Administrator",
-      status: "active",
-      lastLogin: "2023-03-15 14:30",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      role: "Editor",
-      status: "active",
-      lastLogin: "2023-03-14 09:15",
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      email: "bob.johnson@example.com",
-      role: "Viewer",
-      status: "inactive",
-      lastLogin: "2023-02-28 16:45",
-    },
-    {
-      id: 4,
-      name: "Alice Williams",
-      email: "alice.williams@longemailaddress.example.com",
-      role: "Editor",
-      status: "active",
-      lastLogin: "2023-03-15 11:20",
-    },
-    {
-      id: 5,
-      name: "Charlie Brown",
-      email: "charlie.brown@example.com",
-      role: "Viewer",
-      status: "inactive",
-      lastLogin: "2023-03-01 08:30",
-    },
-  ];
-
   return (
-    <DataGrid columns={columns} data={users}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Role</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Last Login</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.name}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </DataGrid>
+    <div className="space-y-4">
+      <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
+        <div className="flex justify-end">
+          <ColumnVisibility />
+        </div>
+        <Table>
+          <TableHeader />
+          <TableBody>
+            <TableRows />
+          </TableBody>
+          <TableFooter />
+        </Table>
+      </DataGrid>
+    </div>
   );
 };

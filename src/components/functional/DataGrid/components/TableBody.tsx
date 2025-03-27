@@ -1,11 +1,8 @@
 import { ReactNode } from "react";
-import { type Row } from "@tanstack/react-table";
 import { TableBody as PrimitiveTableBody } from "@/components/ui/table";
-import { TableRows } from "./TableRows";
-import { type RowData } from "../DataGrid.types";
 
 type TableBodyProps = {
-  children: (row: Row<RowData>) => ReactNode;
+  children?: ReactNode;
 };
 
 /**
@@ -24,9 +21,5 @@ type TableBodyProps = {
  * ```
  */
 export function TableBody({ children }: TableBodyProps) {
-  return (
-    <PrimitiveTableBody>
-      <TableRows>{children}</TableRows>
-    </PrimitiveTableBody>
-  );
+  return <PrimitiveTableBody>{children}</PrimitiveTableBody>;
 }
