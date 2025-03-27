@@ -1,73 +1,31 @@
 import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { DataGrid } from "../../components/DataGrid";
-import { type RowData } from "../../components/DataGrid.types";
 import { DataTable } from "../../components/DataTable";
+import { User, users } from "../data";
 
-type Person = RowData & {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
-
-const defaultData: Person[] = [
-  {
-    id: 1,
-    firstName: "tanner",
-    lastName: "linsley",
-    age: 24,
-    visits: 100,
-    status: "In Relationship",
-    progress: 50,
-  },
-  {
-    id: 2,
-    firstName: "tandy",
-    lastName: "miller",
-    age: 40,
-    visits: 40,
-    status: "Single",
-    progress: 80,
-  },
-  {
-    id: 3,
-    firstName: "joe",
-    lastName: "dirte",
-    age: 45,
-    visits: 20,
-    status: "Complicated",
-    progress: 10,
-  },
-];
-
-const columnHelper = createColumnHelper<Person>();
+const columnHelper = createColumnHelper<User>();
 
 const columns = [
-  columnHelper.accessor("firstName", {
-    header: "First name",
+  columnHelper.accessor("name", {
+    header: "Name",
   }),
-  columnHelper.accessor((row) => row.lastName, {
-    header: "Last name",
+  columnHelper.accessor("email", {
+    header: "Email",
   }),
-  columnHelper.accessor("age", {
-    header: "Age",
-  }),
-  columnHelper.accessor("visits", {
-    header: "Visits",
+  columnHelper.accessor("role", {
+    header: "Role",
   }),
   columnHelper.accessor("status", {
     header: "Status",
   }),
-  columnHelper.accessor("progress", {
-    header: "Profile Progress",
+  columnHelper.accessor("lastLogin", {
+    header: "Last Login",
   }),
 ];
 
 export const Example = () => {
   return (
-    <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
+    <DataGrid columns={columns as ColumnDef<User>[]} data={users}>
       <DataTable />
     </DataGrid>
   );
