@@ -11,7 +11,11 @@ export function HeaderGroups() {
       {tableInstance.getHeaderGroups().map((headerGroup) => (
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => (
-            <TableHead key={header.id} colSpan={header.colSpan}>
+            <TableHead
+              className="border border-red-500"
+              key={header.id}
+              colSpan={header.colSpan}
+            >
               {header.isPlaceholder
                 ? null
                 : flexRender(

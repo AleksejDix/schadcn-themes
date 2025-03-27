@@ -12,7 +12,11 @@ export function FooterGroups() {
       {tableInstance.getFooterGroups().map((footerGroup) => (
         <TableRow key={footerGroup.id}>
           {footerGroup.headers.map((header) => (
-            <TableCell key={header.id} colSpan={header.colSpan}>
+            <TableCell
+              className="border border-blue-500"
+              key={header.id}
+              colSpan={header.colSpan}
+            >
               {header.isPlaceholder
                 ? null
                 : flexRender(
