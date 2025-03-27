@@ -55,10 +55,10 @@ export const ColumnVisibility = () => {
             onCheckedChange={(value) =>
               toggleColumnVisibility(column.id, !!value)
             }
-            // Prevent the dropdown from closing when toggling items
-            onSelect={(e) => e.preventDefault()}
           >
-            {column.columnDef.header?.toString() || column.id}
+            <div className="flex items-center justify-between w-full">
+              {column.id}
+            </div>
           </DropdownMenuCheckboxItem>
         ))}
         <DropdownMenuSeparator />

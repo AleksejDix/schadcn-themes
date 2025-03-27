@@ -6,7 +6,7 @@ export { DataTable } from "./DataTable";
 export { type RowData, useDataGrid } from "./DataGrid.types";
 
 // Row model for headless rendering
-export { RowModel, RowModelSimple } from "./components/RowModel";
+export { TableRows } from "./components/TableRows";
 
 // Table components
 export * from "./components/table";
