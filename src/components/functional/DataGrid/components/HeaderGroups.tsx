@@ -1,7 +1,6 @@
 import { flexRender } from "@tanstack/react-table";
 import { TableRow, TableHead, TableHeader } from "@/components/ui/table";
 import { useDataGrid } from "./DataGrid.types";
-
 export function HeaderGroups() {
   const { tableInstance } = useDataGrid();
   if (!tableInstance) return null;

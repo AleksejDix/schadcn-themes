@@ -24,4 +24,28 @@ export const users: User[] = [
     status: "inactive",
     lastLogin: "2023-03-14 09:15",
   },
+  {
+    id: 3,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "admin",
+    status: "active",
+    lastLogin: "2023-03-15 14:30",
+  },
+  {
+    id: 4,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "admin",
+    status: "active",
+    lastLogin: "2023-03-15 14:30",
+  },
+  {
+    id: 5,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "admin",
+    status: "active",
+    lastLogin: "2023-03-15 14:30",
+  },
 ];

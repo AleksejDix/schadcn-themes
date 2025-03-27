@@ -15,7 +15,7 @@ export function RowModel({ children }: RowModelProps) {
 
   return (
     <TableBody>
-      {tableInstance.getRowModel().rows.map((row) => (
+      {tableInstance.getRowModel().rows.map((row, index) => (
         <TableRow
           key={row.id}
           className={cn(
@@ -40,6 +40,13 @@ export function RowModel({ children }: RowModelProps) {
                 <TableCell
                   key={cell.id}
                   style={{ width: cell.column.getSize() }}
+                  className={cn(
+                    cell.column.getIsFirstColumn() && "bg-red-500",
+                    cell.column.getIsLastColumn() && "bg-blue-500",
+                    index === 0 && "bg-green-500",
+                    index === tableInstance.getRowModel().rows.length - 1 &&
+                      "bg-purple-500"
+                  )}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
