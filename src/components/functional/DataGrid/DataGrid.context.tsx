@@ -1,5 +1,10 @@
 import React from "react";
-import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  VisibilityState,
+} from "@tanstack/react-table";
 import {
   DataGridContext,
   type RowData,
@@ -15,11 +20,18 @@ type DataGridContextProviderProps = {
 export const DataGridContextProvider: React.FC<
   DataGridContextProviderProps
 > = ({ children, columns, data }) => {
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+
   const tableInstance = useReactTable({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
-    // No initial state needed - features will work dynamically
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    state: {
+      columnVisibility,
+    },
   });
 
   return (

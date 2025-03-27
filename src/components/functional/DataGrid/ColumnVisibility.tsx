@@ -22,20 +22,18 @@ export const ColumnVisibility = () => {
 
   // Toggle visibility for a single column
   const toggleColumnVisibility = (columnId: string, visible: boolean) => {
-    // Update through the table API
-    tableInstance.getColumn(columnId)?.toggleVisibility(visible);
+    tableInstance.setColumnVisibility((prev) => ({
+      ...prev,
+      [columnId]: visible,
+    }));
   };
 
   // Reset all columns to visible
   const resetColumnVisibility = () => {
     const newState: Record<string, boolean> = {};
-
-    // Set all columns to visible
     columns.forEach((column) => {
       newState[column.id] = true;
     });
-
-    // Update table state
     tableInstance.setColumnVisibility(newState);
   };
 
