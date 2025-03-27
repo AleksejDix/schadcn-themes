@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { type Row, flexRender } from "@tanstack/react-table";
-import { useDataGrid, type RowData } from "../DataGrid.types";
+import { useDataGrid, type RowData } from "./DataGrid.types";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 type RowModelProps = {

@@ -1,10 +1,11 @@
 import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import { DataGrid } from "../../DataGrid";
+import { DataGrid } from "../../components/DataGrid";
 import { Table } from "@/components/ui/table";
 import { HeaderGroups } from "../../components/HeaderGroups";
-import { FooterGroups } from "../../components/TableFooter";
-import { RowModel } from "../../components/TableRows";
-import { type RowData } from "../../DataGrid.types";
+import { FooterGroups } from "../../components/FooterGroups";
+import { RowModel } from "../../components/RowModel";
+import { type RowData } from "../../components/DataGrid.types";
+import { DataTable } from "../../components/DataTable";
 
 type Person = RowData & {
   firstName: string;
@@ -70,14 +71,8 @@ const columns = [
 
 export const Basic = () => {
   return (
-    <div className="space-y-4">
-      <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
-        <Table>
-          <HeaderGroups />
-          <RowModel />
-          <FooterGroups />
-        </Table>
-      </DataGrid>
-    </div>
+    <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
+      <DataTable />
+    </DataGrid>
   );
 };

@@ -1,5 +1,5 @@
 import { type Cell } from "@tanstack/react-table";
-import { type RowData } from "../../../DataGrid/DataGrid.types";
+import { type RowData } from "../DataGrid.types";
 
 type Props = {
   cell: Cell<RowData, unknown>;

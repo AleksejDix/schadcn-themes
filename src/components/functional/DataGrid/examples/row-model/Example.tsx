@@ -1,10 +1,10 @@
-import { DataGrid } from "../../DataGrid";
+import { DataGrid } from "../../components/DataGrid";
 import { type ColumnDef } from "@tanstack/react-table";
-import { type RowData } from "../../DataGrid.types";
-import { TableRows } from "../../components/TableRows";
+import { type RowData } from "../../components/DataGrid.types";
+import { TableRows } from "../../components/RowModel";
 import { TableHeader } from "../../components/HeaderGroups";
 import { Table, TableBody } from "@/components/ui/table";
-import { ColumnVisibility } from "../../ColumnVisibility";
+import { ColumnVisibility } from "../../components/ColumnVisibility";
 
 // Example data type
 interface User extends RowData {

@@ -1,5 +1,5 @@
 import { flexRender } from "@tanstack/react-table";
-import { useDataGrid } from "../DataGrid.types";
+import { useDataGrid } from "./DataGrid.types";
 import { TableFooter, TableRow, TableCell } from "@/components/ui/table";
 
 export function FooterGroups() {
