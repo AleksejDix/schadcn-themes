@@ -12,9 +12,11 @@ export function HeaderGroups() {
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => (
             <TableHead
-              className="border border-red-500"
               key={header.id}
+              className="border border-red-500"
               colSpan={header.colSpan}
+              scope="col"
+              style={{ width: header.getSize() }}
             >
               {header.isPlaceholder
                 ? null

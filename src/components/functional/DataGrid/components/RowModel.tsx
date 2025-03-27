@@ -18,13 +18,15 @@ export function RowModel({ children }: RowModelProps) {
         <TableRow key={row.id}>
           {children
             ? children(row)
-            : row
-                .getVisibleCells()
-                .map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+            : row.getVisibleCells().map((cell) => (
+                <TableCell
+                  key={cell.id}
+                  className="border border-green-500"
+                  style={{ width: cell.column.getSize() }}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
         </TableRow>
       ))}
     </TableBody>

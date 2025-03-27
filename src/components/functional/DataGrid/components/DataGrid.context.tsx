@@ -29,6 +29,10 @@ export const DataGridContextProvider: React.FC<
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    defaultColumn: {
+      size: 150, // Default column width
+      minSize: 40, // Minimum column width
+    },
     state: {
       columnVisibility,
     },
