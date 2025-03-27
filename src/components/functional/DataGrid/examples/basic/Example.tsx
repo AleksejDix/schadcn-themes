@@ -1,9 +1,5 @@
 import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { DataGrid } from "../../components/DataGrid";
-import { Table } from "@/components/ui/table";
-import { HeaderGroups } from "../../components/HeaderGroups";
-import { FooterGroups } from "../../components/FooterGroups";
-import { RowModel } from "../../components/RowModel";
 import { type RowData } from "../../components/DataGrid.types";
 import { DataTable } from "../../components/DataTable";
 
@@ -69,7 +65,7 @@ const columns = [
   }),
 ];
 
-export const Basic = () => {
+export const Example = () => {
   return (
     <DataGrid columns={columns as ColumnDef<RowData>[]} data={defaultData}>
       <DataTable />

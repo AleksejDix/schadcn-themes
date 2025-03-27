@@ -16,7 +16,7 @@ Based on comparison with TanStack Table's column features, this document outline
 
 **As a user**, I want to reorder columns by dragging them, so that I can customize the table layout to meet my needs.
 
-- [ ] Implement basic column ordering with `enableColumnOrdering` prop
+- [x] Implement basic column ordering with `enableColumnOrdering` prop
 - [ ] Add drag-and-drop functionality for intuitive reordering
 - [ ] Persist column order in state
 - [ ] Provide API for programmatically changing column order

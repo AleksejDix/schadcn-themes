@@ -1,12 +1,12 @@
-import { type Meta, type StoryObj } from "@storybook/react";
-import { Basic } from "./Basic";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Example } from "./Example";
 
 const meta = {
-  title: "DataGrid/Examples/Basic",
-  component: Basic,
-} satisfies Meta<typeof Basic>;
+  title: "DataGrid/Basic",
+  component: Example,
+} satisfies Meta<typeof Example>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Basic: Story = {};
