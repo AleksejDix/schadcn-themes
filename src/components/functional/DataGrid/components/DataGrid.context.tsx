@@ -47,6 +47,9 @@ export const DataGridContextProvider: React.FC<
     state: {
       columnVisibility,
     },
+    manualFiltering: true,
+    enableGlobalFilter: false,
+    manualPagination: true,
   });
 
   return (
