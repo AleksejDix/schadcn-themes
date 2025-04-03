@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Columns, RotateCcw } from "lucide-react";
+import { Columns, RotateCcw, Settings2 } from "lucide-react";
 
 export const ColumnVisibility = () => {
   const { tableInstance } = useDataGrid();
@@ -41,11 +41,12 @@ export const ColumnVisibility = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <Columns className="mr-2 h-4 w-4" />
-          Columns
+          <Settings2 size={16} aria-hidden="true" />
+          <span aria-hidden="true">View</span>
+          <span className="sr-only">View Table Settings</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent side="bottom" align="end">
         {columns.map((column) => (
           <DropdownMenuCheckboxItem
             key={column.id}
@@ -55,7 +56,7 @@ export const ColumnVisibility = () => {
             }
           >
             <div className="flex items-center justify-between w-full">
-              {column.id}
+              {column.columnDef.header?.toString()}
             </div>
           </DropdownMenuCheckboxItem>
         ))}

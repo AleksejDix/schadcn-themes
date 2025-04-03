@@ -40,7 +40,9 @@ export const Example = () => {
 
   return (
     <DataGrid columns={columns} data={users}>
-      <ColumnVisibility />
+      <div className="flex justify-end">
+        <ColumnVisibility />
+      </div>
       <DataTable />
     </DataGrid>
   );

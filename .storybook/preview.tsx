@@ -2,6 +2,7 @@ import "../src/index.css";
 import { Preview } from "@storybook/react";
 import React from "react";
 import { cn } from "../src/lib/utils";
+import "../src/i18n/i18n";
 
 // Custom theme wrapper component to handle theme changes with hooks
 const ThemeWrapper = ({
@@ -81,14 +82,11 @@ const preview: Preview = {
       description: "Color mode (light/dark)",
       defaultValue: "light",
       toolbar: {
-        // The icon for the toolbar item
         icon: "circlehollow",
-        // Array of options
         items: [
           { value: "light", icon: "sun", title: "Light" },
           { value: "dark", icon: "moon", title: "Dark" },
         ],
-        // Property that specifies if the name of the item will be displayed
         showName: true,
       },
     },
@@ -98,16 +96,13 @@ const preview: Preview = {
       description: "Brand theme to apply",
       defaultValue: "default",
       toolbar: {
-        // The icon for the toolbar item
         icon: "paintbrush",
-        // Array of options
         items: [
           { value: "default", icon: "browser", title: "Default" },
           { value: "cocacola", icon: "component", title: "Coca Cola" },
           { value: "rolex", icon: "component", title: "Rolex" },
           { value: "medidata", icon: "component", title: "Medidata" },
         ],
-        // Property that specifies if the name of the item will be displayed
         showName: true,
       },
     },
@@ -118,6 +113,11 @@ const preview: Preview = {
     layout: "padded",
     actions: { argTypesRegex: "^on[A-Z].*" },
     docs: { toc: true },
+    i18n: {
+      defaultLocale: "de",
+      locales: ["de", "en", "fr", "it"],
+      localeDetection: true,
+    },
   },
   decorators: [withBrandTheme],
 };

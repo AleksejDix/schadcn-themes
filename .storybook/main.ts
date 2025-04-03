@@ -9,6 +9,7 @@ const config: StorybookConfig = {
     "@storybook/experimental-addon-test",
     "@storybook/addon-a11y",
     "@storybook/addon-themes",
+    "storybook-i18next",
   ],
   framework: {
     name: "@storybook/react-vite",

@@ -1,0 +1,15 @@
+{
+  "common": {
+    "button": {
+      "submit": "Invia",
+      "cancel": "Annulla"
+    },
+    "table": {
+      "next": "Prossimo",
+      "previous": "Precedente"
+    },
+    "checkbox": {
+      "label": "Seleziona"
+    }
+  }
+}
