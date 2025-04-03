@@ -10,7 +10,7 @@ import fr from "./translations/fr.json";
 import it from "./translations/it.json";
 
 const meta: Meta<typeof LanguageSwitcher> = {
-  title: "UI/LanguageSwitcher",
+  title: "Design System/Language Switcher",
   component: LanguageSwitcher,
   decorators: [
     (Story) => (
@@ -40,7 +40,7 @@ const DemoContent = () => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-end">
         <LanguageSwitcher />
       </div>
 
@@ -84,12 +84,12 @@ const LocalizedContent = () => {
 };
 
 // Story with global translations
-export const WithGlobalTranslations: Story = {
+export const Global: Story = {
   render: () => <DemoContent />,
 };
 
 // Story with component-local translations
-export const WithLocalTranslations: Story = {
+export const Local: Story = {
   decorators: [
     (Story) => (
       <I18nProvider

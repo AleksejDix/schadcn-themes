@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Example } from "./Example";
 
 const meta = {
-  title: "DataGrid/Row Selection",
+  title: "Design System/Data Grid/Row Selection",
   component: Example,
 } satisfies Meta<typeof Example>;
 

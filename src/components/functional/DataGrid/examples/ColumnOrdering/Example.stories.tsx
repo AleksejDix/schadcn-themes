@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Example } from "./Example";
 
 const meta: Meta<typeof Example> = {
-  title: "DataGrid/Column Ordering",
+  title: "Design System/Data Grid/Column Ordering",
   component: Example,
   parameters: {},
 };

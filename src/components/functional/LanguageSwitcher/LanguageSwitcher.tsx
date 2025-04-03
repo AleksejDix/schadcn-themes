@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { Button } from "../../ui/button";
-
+import { Languages } from "lucide-react";
 const languageLabels: Record<Language, string> = {
   de: "Deutsch",
   en: "English",
@@ -23,10 +23,11 @@ export const LanguageSwitcher: React.FC = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm">
+            <Languages size={16} aria-hidden="true" />
             {languageLabels[language]}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" side="bottom">
           {Object.entries(languageLabels).map(([code, label]) => (
             <DropdownMenuItem
               key={code}

@@ -108,6 +108,18 @@ const preview: Preview = {
     },
   },
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          "Design System",
+          "Pages",
+          "Components",
+          "Functional",
+          "UI",
+          "WIP",
+        ],
+      },
+    },
     themes: { disable: true },
     backgrounds: { disable: true },
     layout: "padded",
