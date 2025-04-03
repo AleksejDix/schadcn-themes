@@ -24,29 +24,27 @@ export const DataGridContextProvider: React.FC<
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [columnResizeMode] = React.useState<ColumnResizeMode>("onChange");
-
   // Enable resizing for all columns by default
-  const columnsWithResizing = React.useMemo(() => {
+  const columnsWithDefaults = React.useMemo(() => {
     return columns.map((column) => ({
-      ...column,
       enableResizing: true,
+      enableSorting: false,
+      ...column,
     }));
   }, [columns]);
 
   const tableInstance = useReactTable({
-    columns: columnsWithResizing,
+    columns: columnsWithDefaults,
     data,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     columnResizeMode,
     enableColumnResizing: true,
-    defaultColumn: {
-      enableResizing: true,
-    },
     state: {
       columnVisibility,
     },
+    manualSorting: true,
     manualFiltering: true,
     enableGlobalFilter: false,
     manualPagination: true,
