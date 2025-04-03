@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,8 @@ import {
 import { cn } from "@/lib/utils";
 
 // Define the possible sort directions, including null for reset
-type SortOrderType = ["asc", "desc"];
+export const sortOrder = ["asc", "desc"] as const;
+type SortOrderType = typeof sortOrder;
 export type SortDirection = SortOrderType[number] | null;
 
 // Update props to be compatible with nuqs state pattern
@@ -25,14 +27,24 @@ interface SortableHeaderCellProps<TData extends RowData, TValue> {
   context: HeaderContext<TData, TValue>;
   children: React.ReactNode; // Header display content
   sortDirection: SortDirection; // Current direction from nuqs
+  defaultSortDirection: SortDirection; // Default sort direction
   onSortChange: (direction: SortDirection) => void; // Callback function that matches the nuqs setter signature
   className?: string;
 }
+
+const SortIcon = ({ direction }: { direction: SortDirection }) => {
+  if (direction === "asc")
+    return <ArrowDownNarrowWide size={16} aria-hidden="true" />;
+  if (direction === "desc")
+    return <ArrowDownWideNarrow size={16} aria-hidden="true" />;
+  return <ArrowDownUp size={16} aria-hidden="true" />;
+};
 
 export const SortableHeaderCell = <TData extends RowData, TValue>({
   context,
   children,
   sortDirection,
+  defaultSortDirection,
   onSortChange,
   className,
 }: SortableHeaderCellProps<TData, TValue>) => {
@@ -49,20 +61,9 @@ export const SortableHeaderCell = <TData extends RowData, TValue>({
       {canSort && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="-mr-1.5 h-8 w-8 data-[state=open]:bg-accent"
-              aria-label={`Sort by ${children}`}
-            >
-              {/* Icon based on the passed sortDirection */}
-              {sortDirection === "asc" ? (
-                <ArrowDownNarrowWide size={16} />
-              ) : sortDirection === "desc" ? (
-                <ArrowDownWideNarrow size={16} />
-              ) : (
-                <ArrowDownUp size={16} className="text-muted-foreground/70" />
-              )}
+            <Button variant="ghost" size="icon">
+              <span className="sr-only">Sort by {children}</span>
+              <SortIcon direction={sortDirection} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -70,21 +71,28 @@ export const SortableHeaderCell = <TData extends RowData, TValue>({
               onClick={() => onSortChange("asc")}
               disabled={sortDirection === "asc"}
             >
-              <ArrowDownNarrowWide className="mr-2" size={16} />
+              <SortIcon direction="asc" />
               Ascending
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => onSortChange("desc")}
               disabled={sortDirection === "desc"}
             >
-              <ArrowDownWideNarrow className="mr-2" size={16} />
+              <SortIcon direction="desc" />
               Descending
             </DropdownMenuItem>
-            {sortDirection !== null && (
-              <DropdownMenuItem onClick={() => onSortChange(null)}>
-                <X className="mr-2" size={16} />
-                Reset
-              </DropdownMenuItem>
+
+            {defaultSortDirection === null && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => onSortChange(defaultSortDirection)}
+                  disabled={sortDirection === defaultSortDirection}
+                >
+                  <SortIcon direction={null} />
+                  Reset
+                </DropdownMenuItem>
+              </>
             )}
           </DropdownMenuContent>
         </DropdownMenu>

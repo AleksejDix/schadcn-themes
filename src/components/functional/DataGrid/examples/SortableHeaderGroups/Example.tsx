@@ -40,6 +40,7 @@ export const Example = () => {
                 context={context}
                 sortDirection={nameSort}
                 onSortChange={setNameSort}
+                defaultSortDirection={null}
               >
                 Name
               </SortableHeaderCell>
@@ -56,12 +57,13 @@ export const Example = () => {
                 context={context}
                 sortDirection={emailSort}
                 onSortChange={setEmailSort}
+                defaultSortDirection={null}
               >
                 Email
               </SortableHeaderCell>
             ),
             footer: (props) => props.column.id,
-            enableSorting: true,
+            enableSorting: false,
           }),
           columnHelper.accessor("createdAt", {
             id: "createdAt",
@@ -71,6 +73,7 @@ export const Example = () => {
                 context={context}
                 sortDirection={createdSort}
                 onSortChange={setCreatedSort}
+                defaultSortDirection={"asc"}
               >
                 Created At
               </SortableHeaderCell>
