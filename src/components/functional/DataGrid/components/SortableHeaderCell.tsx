@@ -17,7 +17,8 @@ import {
 import { cn } from "@/lib/utils";
 
 // Define the possible sort directions, including null for reset
-export type SortDirection = string | null;
+type SortOrderType = ["asc", "desc"];
+export type SortDirection = SortOrderType[number] | null;
 
 // Update props to be compatible with nuqs state pattern
 interface SortableHeaderCellProps<TData extends RowData, TValue> {

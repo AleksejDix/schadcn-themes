@@ -4,17 +4,29 @@ import { DataTable } from "../../components/DataTable";
 import { User, users } from "../data";
 import { SortableHeaderCell } from "../../components/SortableHeaderCell";
 import { useMemo } from "react";
-import { useQueryState } from "nuqs";
+import { useQueryState, parseAsStringLiteral } from "nuqs";
 
 const columnHelper = createColumnHelper<User>();
 
+const sortOrder = ["asc", "desc"] as const;
+parseAsStringLiteral(sortOrder);
+
 export const Example = () => {
   // Use parseAsStringEnum with null option
-  const [nameSort, setNameSort] = useQueryState("name");
+  const [nameSort, setNameSort] = useQueryState(
+    "name",
+    parseAsStringLiteral(sortOrder)
+  );
 
-  const [emailSort, setEmailSort] = useQueryState("email");
+  const [emailSort, setEmailSort] = useQueryState(
+    "email",
+    parseAsStringLiteral(sortOrder)
+  );
 
-  const [createdSort, setCreatedSort] = useQueryState("createdAt");
+  const [createdSort, setCreatedSort] = useQueryState(
+    "createdAt",
+    parseAsStringLiteral(sortOrder).withDefault("asc")
+  );
 
   const columns = useMemo(
     () => [
