@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { X, Settings2 } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 export const ColumnVisibility = () => {
   const { tableInstance } = useDataGrid();
@@ -24,11 +24,24 @@ export const ColumnVisibility = () => {
     [tableInstance]
   );
 
-  if (!tableInstance) {
+  // Get columns - might be undefined initially
+  const columns = tableInstance?.getAllLeafColumns();
+  // Get current visibility state
+  const columnVisibility = tableInstance?.getState().columnVisibility;
+
+  // Calculate this before the early return
+  const isResetDisabled = useMemo(() => {
+    // If columns aren't ready, disable reset
+    if (!columns) return true;
+    // Check if every column is currently visible (based on state)
+    return columns.every((column) => column.getIsVisible());
+    // Depend on the visibility state object and columns array
+  }, [columns, columnVisibility]);
+
+  // Early return if table instance is not ready
+  if (!tableInstance || !columns) {
     return null;
   }
-
-  const columns = tableInstance.getAllLeafColumns();
 
   const resetColumnVisibility = () => {
     const newState: Record<string, boolean> = {};
@@ -61,6 +74,7 @@ export const ColumnVisibility = () => {
         ))}
         <DropdownMenuSeparator />
         <DropdownMenuItem
+          disabled={isResetDisabled}
           onSelect={() => {
             resetColumnVisibility();
           }}
