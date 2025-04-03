@@ -21,7 +21,7 @@ parseAsStringLiteral(sortOrder);
 export const Example = () => {
   const [createdSort, setCreatedSort] = useQueryState(
     "createdAt",
-    parseAsStringLiteral(sortOrder).withDefault("asc")
+    parseAsStringLiteral(sortOrder)
   );
 
   const columns = useMemo(
