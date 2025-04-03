@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useI18n, Language } from "../../../lib/i18n";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { Button } from "../../ui/button";
@@ -18,6 +18,13 @@ const languageLabels: Record<Language, string> = {
 export const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useI18n();
 
+  const changeLanguage = useCallback(
+    (code: Language) => {
+      setLanguage(code);
+    },
+    [setLanguage]
+  );
+
   return (
     <nav aria-label="Language selection">
       <DropdownMenu>
@@ -29,14 +36,15 @@ export const LanguageSwitcher: React.FC = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" side="bottom">
           {Object.entries(languageLabels).map(([code, label]) => (
-            <DropdownMenuItem
+            <DropdownMenuCheckboxItem
+              checked={language === code}
               key={code}
-              onClick={() => setLanguage(code as Language)}
+              onCheckedChange={() => changeLanguage(code as Language)}
               lang={code}
               className={language === code ? "bg-accent" : ""}
             >
               {label}
-            </DropdownMenuItem>
+            </DropdownMenuCheckboxItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>

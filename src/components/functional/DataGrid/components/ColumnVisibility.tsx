@@ -8,27 +8,28 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Columns, RotateCcw, Settings2 } from "lucide-react";
+import { X, Settings2 } from "lucide-react";
+import { useCallback } from "react";
 
 export const ColumnVisibility = () => {
   const { tableInstance } = useDataGrid();
+
+  const toggleColumnVisibility = useCallback(
+    (columnId: string, visible: boolean) => {
+      tableInstance?.setColumnVisibility((prev) => ({
+        ...prev,
+        [columnId]: visible,
+      }));
+    },
+    [tableInstance]
+  );
 
   if (!tableInstance) {
     return null;
   }
 
-  // Get all leaf columns (columns that can be shown/hidden)
   const columns = tableInstance.getAllLeafColumns();
 
-  // Toggle visibility for a single column
-  const toggleColumnVisibility = (columnId: string, visible: boolean) => {
-    tableInstance.setColumnVisibility((prev) => ({
-      ...prev,
-      [columnId]: visible,
-    }));
-  };
-
-  // Reset all columns to visible
   const resetColumnVisibility = () => {
     const newState: Record<string, boolean> = {};
     columns.forEach((column) => {
@@ -55,21 +56,17 @@ export const ColumnVisibility = () => {
               toggleColumnVisibility(column.id, !!value)
             }
           >
-            <div className="flex items-center justify-between w-full">
-              {column.columnDef.header?.toString()}
-            </div>
+            <div>{column.columnDef.header?.toString()}</div>
           </DropdownMenuCheckboxItem>
         ))}
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="flex justify-center items-center text-sm text-gray-500"
-          onSelect={(e) => {
-            e.preventDefault();
+          onSelect={() => {
             resetColumnVisibility();
           }}
         >
-          <RotateCcw className="mr-2 h-4 w-4" />
-          Show All Columns
+          <X size={16} aria-hidden="true" />
+          Reset Columns
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
