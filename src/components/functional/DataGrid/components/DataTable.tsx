@@ -1,10 +1,11 @@
 import { useDataGrid } from "./DataGrid.types";
-import { Table, TableCaption } from "@/components/ui/table";
+import { Table } from "@/components/ui/table";
 import { RowModel } from "./RowModel";
 import { HeaderGroups } from "./HeaderGroups";
 import { FooterGroups } from "./FooterGroups";
+import { PropsWithChildren } from "react";
 
-export const DataTable = () => {
+export const DataTable = ({ children }: PropsWithChildren) => {
   const { tableInstance } = useDataGrid();
 
   if (!tableInstance) {
@@ -13,10 +14,13 @@ export const DataTable = () => {
 
   return (
     <Table>
-      <TableCaption>Caption</TableCaption>
-      <HeaderGroups />
-      <RowModel />
-      <FooterGroups />
+      {children || (
+        <>
+          <HeaderGroups />
+          <RowModel />
+          <FooterGroups />
+        </>
+      )}
     </Table>
   );
 };

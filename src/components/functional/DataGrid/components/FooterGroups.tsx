@@ -7,6 +7,11 @@ export function FooterGroups() {
 
   if (!tableInstance) return null;
 
+  const hasFooter = tableInstance.getFooterGroups().length > 0;
+  console.log("hasFooter", tableInstance.getFooterGroups());
+
+  if (!hasFooter) return null;
+
   return (
     <TableFooter>
       {tableInstance.getFooterGroups().map((footerGroup) => (
