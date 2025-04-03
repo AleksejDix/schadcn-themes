@@ -3,6 +3,9 @@ import { Preview } from "@storybook/react";
 import React from "react";
 import { cn } from "../src/lib/utils";
 import "../src/i18n/i18n";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v6";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 // Custom theme wrapper component to handle theme changes with hooks
 const ThemeWrapper = ({
@@ -74,6 +77,21 @@ const withBrandTheme = (
   );
 };
 
+const withNuqs = (Story: React.ComponentType) => {
+  const router = createBrowserRouter([
+    {
+      path: "*",
+      element: <Story />,
+    },
+  ]);
+
+  return (
+    <NuqsAdapter>
+      <RouterProvider router={router} />
+    </NuqsAdapter>
+  );
+};
+
 const preview: Preview = {
   globalTypes: {
     // Color mode toggle (light/dark)
@@ -130,8 +148,23 @@ const preview: Preview = {
       locales: ["de", "en", "fr", "it"],
       localeDetection: true,
     },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
   },
-  decorators: [withBrandTheme],
+  decorators: [
+    withNuqs,
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 };
 
 export default preview;

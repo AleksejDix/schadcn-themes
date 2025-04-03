@@ -16,58 +16,75 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Define the possible sort directions, including null for reset
+export type SortDirection = string | null;
+
+// Update props to be compatible with nuqs state pattern
 interface SortableHeaderCellProps<TData extends RowData, TValue> {
   context: HeaderContext<TData, TValue>;
-  children: React.ReactNode;
+  children: React.ReactNode; // Header display content
+  sortDirection: SortDirection; // Current direction from nuqs
+  onSortChange: (direction: SortDirection) => void; // Callback function that matches the nuqs setter signature
   className?: string;
 }
 
 export const SortableHeaderCell = <TData extends RowData, TValue>({
   context,
   children,
+  sortDirection,
+  onSortChange,
   className,
 }: SortableHeaderCellProps<TData, TValue>) => {
   const { header } = context;
   const { column } = header;
+  // Still check if the column definition allows sorting conceptually
   const canSort = column.getCanSort();
-  const sortDirection = canSort ? column.getIsSorted() : false;
 
   return (
     <div className={cn("flex items-center justify-between gap-2", className)}>
-      {/* Render original header content */}
       <div className="flex-grow">{children}</div>
 
-      {/* Conditionally render sort dropdown trigger */}
+      {/* Conditionally render sort dropdown trigger if column *can* be sorted */}
       {canSort && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="icon"
+              className="-mr-1.5 h-8 w-8 data-[state=open]:bg-accent"
               aria-label={`Sort by ${children}`}
             >
+              {/* Icon based on the passed sortDirection */}
               {sortDirection === "asc" ? (
                 <ArrowDownNarrowWide size={16} />
               ) : sortDirection === "desc" ? (
                 <ArrowDownWideNarrow size={16} />
               ) : (
-                <ArrowDownUp size={16} />
+                <ArrowDownUp size={16} className="text-muted-foreground/70" />
               )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
-              <ArrowDownNarrowWide size={16} />
+            <DropdownMenuItem
+              onClick={() => onSortChange("asc")}
+              disabled={sortDirection === "asc"}
+            >
+              <ArrowDownNarrowWide className="mr-2" size={16} />
               Ascending
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
-              <ArrowDownWideNarrow size={16} />
+            <DropdownMenuItem
+              onClick={() => onSortChange("desc")}
+              disabled={sortDirection === "desc"}
+            >
+              <ArrowDownWideNarrow className="mr-2" size={16} />
               Descending
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => column.clearSorting()}>
-              <X size={16} />
-              Reset
-            </DropdownMenuItem>
+            {sortDirection !== null && (
+              <DropdownMenuItem onClick={() => onSortChange(null)}>
+                <X className="mr-2" size={16} />
+                Reset
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       )}
