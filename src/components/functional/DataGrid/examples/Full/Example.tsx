@@ -4,18 +4,12 @@ import { DataTable } from "../../components/DataTable";
 import { Transmission, transmissions } from "../data";
 import { SortableHeaderCell } from "../../components/SortableHeaderCell";
 import { useMemo } from "react";
-import {
-  useQueryState,
-  parseAsStringLiteral,
-  parseAsTimestamp,
-  parseAsIsoDate,
-} from "nuqs";
+import { useQueryState, parseAsStringLiteral } from "nuqs";
 import { RowModel } from "../../components/RowModel";
 import { HeaderGroups } from "../../components/HeaderGroups";
 import { ColumnVisibility } from "../../components/ColumnVisibility";
 import { ColumnOrdering } from "../../components/ColumnOrdering";
 import { createStatusCell } from "../../components/custom-cells/Status";
-
 import { createDateCell } from "../../components/custom-cells/Date";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-dropdown-menu";
@@ -24,6 +18,20 @@ const columnHelper = createColumnHelper<Transmission>();
 
 const sortOrder = ["asc", "desc"] as const;
 parseAsStringLiteral(sortOrder);
+
+// Helper functions for Swiss timezone handling
+function toSwissTime(date: Date): Date {
+  // Convert the date to Swiss timezone by using toLocaleString with Swiss locale
+  // This ensures the date is interpreted in Swiss timezone regardless of the user's local timezone
+  return new Date(date.toLocaleString("de-CH", { timeZone: "Europe/Zurich" }));
+}
+
+function formatDateForInput(dateStr: string | null): string {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  const swissDate = toSwissTime(date);
+  return swissDate.toISOString().split("T")[0]; // Gets YYYY-MM-DD
+}
 
 export const Example = () => {
   const [createdSort, setCreatedSort] = useQueryState(
@@ -43,7 +51,10 @@ export const Example = () => {
     if (value === "") {
       setFromDateFilter(null);
     } else {
-      setFromDateFilter(value);
+      // Convert the selected date to Swiss timezone
+      const localDate = new Date(value);
+      const swissDate = toSwissTime(localDate);
+      setFromDateFilter(swissDate.toISOString());
     }
   }
 
@@ -52,7 +63,10 @@ export const Example = () => {
     if (value === "") {
       setToDateFilter(null);
     } else {
-      setToDateFilter(value);
+      // Convert the selected date to Swiss timezone
+      const localDate = new Date(value);
+      const swissDate = toSwissTime(localDate);
+      setToDateFilter(swissDate.toISOString());
     }
   }
 
@@ -108,20 +122,20 @@ export const Example = () => {
           />
         </div>
         <div>
-          <Label>From Date</Label>
+          <Label>From Date (Swiss Time)</Label>
           <Input
             id="fromDate"
             type="date"
-            value={fromDateFilter ?? ""}
+            value={formatDateForInput(fromDateFilter)}
             onChange={updateFromDateFilter}
           />
         </div>
         <div>
-          <Label>To Date</Label>
+          <Label>To Date (Swiss Time)</Label>
           <Input
             id="toDate"
             type="date"
-            value={toDateFilter ?? ""}
+            value={formatDateForInput(toDateFilter)}
             onChange={updateToDateFilter}
           />
         </div>

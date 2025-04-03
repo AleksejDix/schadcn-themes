@@ -3,7 +3,6 @@ import { type RowData } from "../DataGrid.types";
 import { type Column } from "@tanstack/react-table";
 
 type DateCellProps = {
-  format?: string;
   fallback?: string;
 };
 
@@ -11,8 +10,7 @@ export function DateCell({
   getValue,
   column: { columnDef },
 }: CellContext<RowData, unknown>) {
-  const { format = "PPp", fallback = "-" } =
-    (columnDef.meta as DateCellProps) ?? {};
+  const { fallback = "-" } = (columnDef.meta as DateCellProps) ?? {};
   const value = getValue() as string | Date | null | undefined;
 
   if (!value) return <span>{fallback}</span>;
@@ -30,19 +28,12 @@ export function DateCell({
       >
         {new Intl.DateTimeFormat("de-CH", {
           timeZone: "Europe/Zurich",
-          ...(format === "PPp"
-            ? {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              }
-            : {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              }),
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
         }).format(date)}
       </time>
     );
@@ -52,7 +43,6 @@ export function DateCell({
 }
 
 export function createDateCell<TData extends RowData>({
-  format = "PPp",
   fallback = "-",
 }: DateCellProps = {}) {
   return function DateCellRenderer(context: CellContext<TData, unknown>) {
@@ -60,7 +50,7 @@ export function createDateCell<TData extends RowData>({
       ...context.column,
       columnDef: {
         ...context.column.columnDef,
-        meta: { format, fallback },
+        meta: { fallback },
       },
     };
     return (

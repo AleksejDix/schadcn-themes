@@ -26,6 +26,7 @@ export const ColumnVisibility = () => {
 
   // Get columns - might be undefined initially
   const columns = tableInstance?.getAllLeafColumns();
+
   // Get current visibility state
   const columnVisibility = tableInstance?.getState().columnVisibility;
 
