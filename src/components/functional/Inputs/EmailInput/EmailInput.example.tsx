@@ -6,32 +6,46 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect } from "react";
 
-const FormSchema = z.object({
-  email: z.string().email("Invalid email address"),
-});
+const getSchema = (required: boolean) =>
+  z.object({
+    email: required
+      ? z.string().min(1, "Email is required").email("Invalid email address")
+      : z.string().optional(),
+  });
 
-type FormSchemaType = z.infer<typeof FormSchema>;
+type FormSchemaType = z.infer<ReturnType<typeof getSchema>>;
 
 type EmailFormProps = {
-  label?: string;
+  label: string;
   description?: string;
   className?: string;
   errorMessage?: string;
+  defaultValue?: string;
+  hideLabel?: boolean;
+  placeholder?: string;
+  required?: boolean;
 };
 
-export const EmailForm = (props: EmailFormProps) => {
-  const { label, description, className, errorMessage } = props;
-
+export const EmailForm = ({
+  label,
+  description,
+  className,
+  errorMessage,
+  defaultValue = "",
+  hideLabel = false,
+  placeholder,
+  required = false,
+}: EmailFormProps) => {
   const form = useForm<FormSchemaType>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(getSchema(required)),
     defaultValues: {
-      email: "",
+      email: defaultValue,
     },
   });
 
-  // Clear previous errors and set new errors when errorMessage changes
+  // Set error if provided
   useEffect(() => {
-    form.clearErrors("email");
+    form.clearErrors();
 
     if (errorMessage) {
       form.setError("email", {
@@ -41,29 +55,25 @@ export const EmailForm = (props: EmailFormProps) => {
     }
   }, [errorMessage, form]);
 
-  // Reset the form when any props change to ensure the updated props are used
-  useEffect(() => {
-    // We only want to reset if already mounted (not on initial render)
-    const isInitialRender =
-      form.formState.isDirty === false && !form.formState.isSubmitted;
-
-    if (!isInitialRender) {
-      form.reset(undefined, { keepValues: true });
-    }
-  }, [label, description, className, form]);
-
   const onSubmit = (data: FormSchemaType) => {
     console.log(data);
   };
 
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        noValidate
+        className="space-y-4"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <EmailInput
           name="email"
           label={label}
           description={description}
           className={className}
+          hideLabel={hideLabel}
+          placeholder={placeholder}
+          required={required}
         />
         <div>
           <Button type="submit">Submit</Button>
