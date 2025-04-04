@@ -114,7 +114,7 @@ describe("SwitchInput", () => {
       </FormWrapper>
     );
     const switchElement = screen.getByRole("switch");
-    expect(switchElement).toHaveAttribute("required");
+    expect(switchElement).toHaveAttribute("aria-required", "true");
   });
 
   it("visually hides label when hideLabel is true", () => {
