@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { EmailInput } from "./PasswordInput";
+import { PasswordInput } from "./PasswordInput";
 import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,13 +29,13 @@ const FormWrapper = ({
   defaultValue?: string;
 }) => {
   const schema = z.object({
-    email: z.string().email("Invalid email address").optional(),
+    password: z.string().optional(),
   });
 
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: defaultValue,
+      password: defaultValue,
     },
   });
 
@@ -46,38 +46,42 @@ const FormWrapper = ({
   );
 };
 
-describe("EmailInput", () => {
+describe("PasswordInput", () => {
   it("renders with label", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" />
+        <PasswordInput name="password" label="Password" />
       </FormWrapper>
     );
 
-    expect(screen.getByText("Email Address")).toBeInTheDocument();
+    expect(screen.getByText("Password")).toBeInTheDocument();
   });
 
   it("renders with correct input type", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" />
+        <PasswordInput name="password" label="Password" />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
-    expect(input).toHaveAttribute("type", "email");
+    const input = screen.getByLabelText("Password");
+    expect(input).toHaveAttribute("type", "password");
   });
 
   it("applies className correctly", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" className="test-class" />
+        <PasswordInput
+          name="password"
+          label="Password"
+          className="test-class"
+        />
       </FormWrapper>
     );
 
     // Using querySelector instead of getByRole since the element doesn't have role="group"
     const formItem = screen
-      .getByText("Email Address")
+      .getByText("Password")
       .closest('div[data-slot="form-item"]');
     expect(formItem).toHaveClass("test-class");
   });
@@ -85,36 +89,36 @@ describe("EmailInput", () => {
   it("uses default autoComplete value", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" />
+        <PasswordInput name="password" label="Password" />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
-    expect(input).toHaveAttribute("autocomplete", "email");
+    const input = screen.getByLabelText("Password");
+    expect(input).toHaveAttribute("autocomplete", "current-password");
   });
 
   it("applies custom autoComplete value", () => {
     render(
       <FormWrapper>
-        <EmailInput
-          name="email"
-          label="Email Address"
-          autoComplete="username"
+        <PasswordInput
+          name="password"
+          label="Password"
+          autoComplete="new-password"
         />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
-    expect(input).toHaveAttribute("autocomplete", "username");
+    const input = screen.getByLabelText("Password");
+    expect(input).toHaveAttribute("autocomplete", "new-password");
   });
 
   it("renders with description when provided", () => {
-    const description = "We'll never share your email";
+    const description = "Your password must be at least 8 characters";
     render(
       <FormWrapper>
-        <EmailInput
-          name="email"
-          label="Email Address"
+        <PasswordInput
+          name="password"
+          label="Password"
           description={description}
         />
       </FormWrapper>
@@ -124,80 +128,102 @@ describe("EmailInput", () => {
   });
 
   it("renders with placeholder when provided", () => {
-    const placeholder = "example@domain.com";
+    const placeholder = "Enter your password";
     render(
       <FormWrapper>
-        <EmailInput
-          name="email"
-          label="Email Address"
+        <PasswordInput
+          name="password"
+          label="Password"
           placeholder={placeholder}
         />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
+    const input = screen.getByLabelText("Password");
     expect(input).toHaveAttribute("placeholder", placeholder);
   });
 
   it("displays the default value", () => {
-    const defaultValue = "test@example.com";
+    const defaultValue = "TestPassword123";
     render(
       <FormWrapper defaultValue={defaultValue}>
-        <EmailInput name="email" label="Email Address" />
+        <PasswordInput name="password" label="Password" />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
+    const input = screen.getByLabelText("Password");
     expect(input).toHaveValue(defaultValue);
   });
 
   it("handles user input correctly", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" />
+        <PasswordInput name="password" label="Password" />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
-    fireEvent.change(input, { target: { value: "user@example.com" } });
+    const input = screen.getByLabelText("Password");
+    fireEvent.change(input, { target: { value: "NewPassword123" } });
 
-    expect(input).toHaveValue("user@example.com");
+    expect(input).toHaveValue("NewPassword123");
   });
 
   it("renders as disabled when disabled prop is true", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" disabled={true} />
+        <PasswordInput name="password" label="Password" disabled={true} />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
+    const input = screen.getByLabelText("Password");
     expect(input).toBeDisabled();
   });
 
   it("renders as required when required prop is true", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" required={true} />
+        <PasswordInput name="password" label="Password" required={true} />
       </FormWrapper>
     );
 
-    const input = screen.getByLabelText("Email Address");
+    const input = screen.getByLabelText("Password");
     expect(input).toHaveAttribute("required");
   });
 
   it("visually hides label when hideLabel is true", () => {
     render(
       <FormWrapper>
-        <EmailInput name="email" label="Email Address" hideLabel={true} />
+        <PasswordInput name="password" label="Password" hideLabel={true} />
       </FormWrapper>
     );
 
-    const label = screen.getByText("Email Address");
+    const label = screen.getByText("Password");
     expect(label).toHaveClass("sr-only");
 
     // Input should still be accessible by label
-    const input = screen.getByLabelText("Email Address");
+    const input = screen.getByLabelText("Password");
     expect(input).toBeInTheDocument();
+  });
+
+  it("toggles password visibility when show/hide button is clicked", () => {
+    render(
+      <FormWrapper>
+        <PasswordInput name="password" label="Password" />
+      </FormWrapper>
+    );
+
+    const input = screen.getByLabelText("Password");
+    expect(input).toHaveAttribute("type", "password");
+
+    // Find and click the show/hide button
+    const toggleButton = screen.getByRole("button", { name: /show password/i });
+    fireEvent.click(toggleButton);
+
+    // Password should now be visible
+    expect(input).toHaveAttribute("type", "text");
+
+    // Click again to hide
+    fireEvent.click(toggleButton);
+    expect(input).toHaveAttribute("type", "password");
   });
 });
