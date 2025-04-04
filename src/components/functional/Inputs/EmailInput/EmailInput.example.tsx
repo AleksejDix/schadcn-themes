@@ -15,6 +15,8 @@ const getSchema = (required: boolean) =>
 
 type FormSchemaType = z.infer<ReturnType<typeof getSchema>>;
 
+type EmailAutocompleteOption = "email" | "username" | "off" | "on";
+
 type EmailFormProps = {
   label: string;
   description?: string;
@@ -24,6 +26,8 @@ type EmailFormProps = {
   hideLabel?: boolean;
   placeholder?: string;
   required?: boolean;
+  autoComplete?: EmailAutocompleteOption;
+  disabled?: boolean;
 };
 
 export const EmailForm = ({
@@ -35,6 +39,8 @@ export const EmailForm = ({
   hideLabel = false,
   placeholder,
   required = false,
+  autoComplete = "email",
+  disabled = false,
 }: EmailFormProps) => {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(getSchema(required)),
@@ -74,6 +80,8 @@ export const EmailForm = ({
           hideLabel={hideLabel}
           placeholder={placeholder}
           required={required}
+          autoComplete={autoComplete}
+          disabled={disabled}
         />
         <div>
           <Button type="submit">Submit</Button>
