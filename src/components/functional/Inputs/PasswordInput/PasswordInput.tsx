@@ -42,7 +42,6 @@ export const PasswordInput = ({
   autoComplete = "current-password",
   disabled = false,
   required = false,
-  showStrengthIndicator = false,
 }: Props) => {
   const { control } = useFormContext();
   const [showPassword, setShowPassword] = useState(false);

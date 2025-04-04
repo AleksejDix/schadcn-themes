@@ -4,50 +4,6 @@ import { PasswordForm } from "./PasswordInput.example";
 const meta = {
   title: "Inputs/password",
   component: PasswordForm,
-  argTypes: {
-    label: {
-      control: "text",
-      description: "Label for the email input (required for accessibility)",
-    },
-    description: {
-      control: "text",
-      description: "Helper text for the input",
-    },
-    className: {
-      control: "text",
-      description: "CSS class for styling",
-    },
-    errorMessage: {
-      control: "text",
-      description: "Error message to display",
-    },
-    defaultValue: {
-      control: "text",
-      description: "Default value for the email input",
-    },
-    hideLabel: {
-      control: "boolean",
-      description: "Visually hide the label while maintaining accessibility",
-    },
-    placeholder: {
-      control: "text",
-      description:
-        "Placeholder text for the input (not a substitute for labels)",
-    },
-    autoComplete: {
-      control: "select",
-      options: ["email", "username", "off", "on"],
-      description: "HTML autocomplete attribute for the input",
-    },
-    disabled: {
-      control: "boolean",
-      description: "Whether the input is disabled",
-    },
-    required: {
-      control: "boolean",
-      description: "Whether the input is required",
-    },
-  },
   tags: ["autodocs"],
 } satisfies Meta<typeof PasswordForm>;
 
