@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { EmailForm } from "./EmailInput.example";
 
 const meta = {
-  title: "Inputs/Email Input",
+  title: "Inputs/email",
   component: EmailForm,
   argTypes: {
     label: {
