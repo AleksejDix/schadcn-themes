@@ -77,7 +77,19 @@ const withBrandTheme = (
   );
 };
 
-const withNuqs = (Story: React.ComponentType) => {
+const withNuqs = (
+  Story: React.ComponentType,
+  context: { parameters?: { nuqs?: { disabled?: boolean } } }
+) => {
+  // Check if nuqs should be disabled for this story
+  const isNuqsDisabled = context.parameters?.nuqs?.disabled;
+
+  // If nuqs is disabled, render the story directly
+  if (isNuqsDisabled) {
+    return <Story />;
+  }
+
+  // Otherwise, wrap with NuqsAdapter and RouterProvider
   const router = createBrowserRouter([
     {
       path: "*",
@@ -157,6 +169,7 @@ const preview: Preview = {
   },
   decorators: [
     withNuqs,
+    withBrandTheme,
     withThemeByClassName({
       themes: {
         light: "light",
