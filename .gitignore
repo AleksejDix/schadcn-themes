@@ -26,3 +26,5 @@ storybook-static
 
 *storybook.log
 .vercel
+
+coverage
