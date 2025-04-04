@@ -34,6 +34,15 @@ type TextInputAutocompleteOption =
   | "organization"
   | "url";
 
+type InputType =
+  | "text"
+  | "email"
+  | "number"
+  | "date"
+  | "password"
+  | "tel"
+  | "url";
+
 type Props = {
   name: string;
   label: string;
@@ -47,6 +56,7 @@ type Props = {
   maxLength?: number;
   pattern?: string;
   defaultValue?: string;
+  type?: InputType;
 };
 
 export const TextInput = ({
@@ -61,6 +71,7 @@ export const TextInput = ({
   required = false,
   maxLength,
   pattern,
+  type = "text",
 }: Props) => {
   const { control } = useFormContext();
 
@@ -82,7 +93,7 @@ export const TextInput = ({
   const renderInput = (field: FieldValues) => (
     <FormControl>
       <Input
-        type="text"
+        type={type}
         {...field}
         placeholder={placeholder}
         autoComplete={autoComplete}

@@ -6,26 +6,16 @@ import {
 } from "nuqs";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Form } from "@/components/ui/form";
+
+// Import custom input components
+import { TextInput } from "@/components/functional/inputs/TextInput/TextInput";
+import { SelectInput } from "@/components/functional/inputs/SelectInput/SelectInput";
+import { IntegerInput } from "@/components/functional/inputs/IntegerInput/IntegerInput";
 
 export const FacetFilters = () => {
   // Always use Swiss time (Europe/Zurich) in yyyy-MM-dd format
@@ -113,184 +103,96 @@ export const FacetFilters = () => {
     setQueryValues(data);
   }
 
+  // Options for select inputs
+  const statusOptions = [
+    { value: "TODO", label: "TODO" },
+    { value: "DONE", label: "DONE" },
+  ];
+
+  const transmissionTypeOptions = [
+    { value: "SEND", label: "SEND" },
+    { value: "RECEIVE", label: "RECEIVE" },
+  ];
+
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full max-w-4xl space-y-6"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="participantid"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Participant ID</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <FormProvider {...form}>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full max-w-4xl space-y-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <IntegerInput
+              name="participantid"
+              label="Participant ID"
+              placeholder="Enter participant ID"
+              min={1}
+            />
 
-          <FormField
-            control={form.control}
-            name="datefrom"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date From</FormLabel>
-                <FormControl>
-                  <Input type="date" {...field} value={field.value || ""} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <TextInput
+              name="datefrom"
+              label="Date From"
+              type="date"
+              defaultValue={swissYesterday}
+            />
 
-          <FormField
-            control={form.control}
-            name="dateto"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date To</FormLabel>
-                <FormControl>
-                  <Input type="date" {...field} value={field.value || ""} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <TextInput
+              name="dateto"
+              label="Date To"
+              type="date"
+              defaultValue={swissToday}
+            />
 
-          <FormField
-            control={form.control}
-            name="status"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Status</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="TODO">TODO</SelectItem>
-                    <SelectItem value="DONE">DONE</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <SelectInput
+              name="status"
+              label="Status"
+              options={statusOptions}
+              placeholder="Select status"
+            />
 
-          <FormField
-            control={form.control}
-            name="correlationreference"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Correlation Reference</FormLabel>
-                <FormControl>
-                  <Input {...field} value={field.value || ""} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <TextInput
+              name="correlationreference"
+              label="Correlation Reference"
+              placeholder="Enter correlation reference"
+            />
 
-          <FormField
-            control={form.control}
-            name="technicalproductname"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Technical Product Name</FormLabel>
-                <FormControl>
-                  <Input {...field} value={field.value || ""} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <TextInput
+              name="technicalproductname"
+              label="Technical Product Name"
+              placeholder="Enter product name"
+            />
 
-          <FormField
-            control={form.control}
-            name="transmissiontype"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Transmission Type</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value || ""}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="SEND">SEND</SelectItem>
-                    <SelectItem value="RECEIVE">RECEIVE</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <SelectInput
+              name="transmissiontype"
+              label="Transmission Type"
+              options={transmissionTypeOptions}
+              placeholder="Select type"
+            />
 
-          <FormField
-            control={form.control}
-            name="offset"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Offset</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <IntegerInput
+              name="offset"
+              label="Offset"
+              placeholder="Enter offset"
+              min={0}
+            />
 
-          <FormField
-            control={form.control}
-            name="limit"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Limit</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+            <IntegerInput
+              name="limit"
+              label="Limit"
+              placeholder="Enter limit"
+              min={1}
+              defaultValue={30}
+            />
+          </div>
 
-        <div className="flex justify-end gap-2">
-          <Button type="button" variant="outline" onClick={handleReset}>
-            Reset
-          </Button>
-          <Button type="submit">Apply Filters</Button>
-        </div>
-      </form>
-    </Form>
+          <div className="flex justify-end gap-2">
+            <Button type="button" variant="outline" onClick={handleReset}>
+              Reset
+            </Button>
+            <Button type="submit">Apply Filters</Button>
+          </div>
+        </form>
+      </Form>
+    </FormProvider>
   );
 };

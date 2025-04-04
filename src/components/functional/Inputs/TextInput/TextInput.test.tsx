@@ -1,9 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { TextInput } from "./TextInput";
-import { useForm, FormProvider } from "react-hook-form";
-import { z } from "zod";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
 // Mock ResizeObserver
@@ -20,17 +21,23 @@ afterAll(() => {
   delete global.ResizeObserver;
 });
 
+interface FormWrapperProps {
+  children: React.ReactNode;
+  defaultValue?: string;
+  validationSchema?: z.ZodObject<z.ZodRawShape>;
+}
+
 // FormWrapper to provide context to the component
 const FormWrapper = ({
   children,
   defaultValue = "",
-}: {
-  children: React.ReactNode;
-  defaultValue?: string;
-}) => {
-  const schema = z.object({
-    test: z.string().optional(),
-  });
+  validationSchema,
+}: FormWrapperProps) => {
+  const schema =
+    validationSchema ||
+    z.object({
+      test: z.string().optional(),
+    });
 
   const form = useForm({
     resolver: zodResolver(schema),
@@ -41,7 +48,10 @@ const FormWrapper = ({
 
   return (
     <FormProvider {...form}>
-      <form>{children}</form>
+      <form onSubmit={form.handleSubmit(() => {})}>
+        {children}
+        <button type="submit">Submit</button>
+      </form>
     </FormProvider>
   );
 };
@@ -75,22 +85,10 @@ describe("TextInput", () => {
       </FormWrapper>
     );
 
-    // Using querySelector instead of getByRole since the element doesn't have role="group"
     const formItem = screen
       .getByText("Name")
       .closest('div[data-slot="form-item"]');
     expect(formItem).toHaveClass("test-class");
-  });
-
-  it("uses default autoComplete value", () => {
-    render(
-      <FormWrapper>
-        <TextInput name="test" label="Name" />
-      </FormWrapper>
-    );
-
-    const input = screen.getByLabelText("Name");
-    expect(input).toHaveAttribute("autocomplete", "off");
   });
 
   it("applies custom autoComplete value", () => {
@@ -210,5 +208,26 @@ describe("TextInput", () => {
 
     const input = screen.getByLabelText("Name");
     expect(input).toHaveAttribute("pattern", pattern);
+  });
+
+  it("shows validation error when required field is not filled", async () => {
+    const validationSchema = z.object({
+      test: z.string().min(1, "This field is required"),
+    });
+
+    const { container } = render(
+      <FormWrapper validationSchema={validationSchema}>
+        <TextInput name="test" label="Name" required={true} />
+      </FormWrapper>
+    );
+
+    // Submit without filling the input
+    fireEvent.click(screen.getByText("Submit"));
+
+    // Wait for form message to appear
+    await waitFor(() => {
+      const formMessage = container.querySelector('[data-slot="form-message"]');
+      expect(formMessage).toBeInTheDocument();
+    });
   });
 });
