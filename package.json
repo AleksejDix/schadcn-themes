@@ -13,7 +13,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "test:storybook": "vitest --config vitest.stories.config.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
