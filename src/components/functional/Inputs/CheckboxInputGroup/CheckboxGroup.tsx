@@ -39,11 +39,14 @@ export const CheckboxGroup = ({
 }: CheckboxGroupProps) => {
   const { control } = useFormContext();
 
+  const renderRequired = (required: boolean) =>
+    required && <span className="text-destructive -ml-1">*</span>;
+
   const renderLabel = () =>
     label ? (
       <FormLabel className={cn(hideLabel && "sr-only")}>
         {label}
-        {required && <span className="text-destructive ml-1">*</span>}
+        {renderRequired(required)}
       </FormLabel>
     ) : null;
 
@@ -100,7 +103,7 @@ export const CheckboxGroup = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn("space-y-2", className)}>
+        <FormItem className={cn("border p-2", className)}>
           {renderLabel()}
           {renderDescription()}
           {renderCheckboxes(field)}

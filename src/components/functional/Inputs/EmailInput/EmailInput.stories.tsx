@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EmailForm } from "./EmailInput.example";
+import { EmailForm, DomainRestrictedEmailForm } from "./EmailInput.example";
 
 const meta = {
   title: "Inputs/email",
@@ -49,6 +49,29 @@ const meta = {
     },
   },
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+## EmailInput Component
+
+A form input component for collecting email addresses with:
+- Integration with Zod validation
+- Mobile-friendly keyboard with \`inputMode="email"\`
+- ARIA accessibility attributes (automatically handled by FormControl)
+- Support for domain-specific validation via Zod (see DomainRestricted example)
+
+### Mobile Experience
+This component uses \`inputMode="email"\` to bring up the specialized email keyboard on mobile
+devices with the @ and . characters readily available.
+
+### Validation
+Email validation is handled by Zod, which provides robust email format validation. The component itself
+doesn't perform validation directly, making it easy to customize validation rules at the form level.
+        `,
+      },
+    },
+  },
 } satisfies Meta<typeof EmailForm>;
 
 export default meta;
@@ -136,5 +159,18 @@ export const WithErrorAndDescription: Story = {
     errorMessage: "The email domain is not allowed. Use your company email.",
     placeholder: "name@company.com",
     className: "w-2/3",
+  },
+};
+
+// Example with domain restriction using Zod
+export const DomainRestricted: StoryObj = {
+  render: () => <DomainRestrictedEmailForm />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Example showing domain-specific email validation that only accepts "@example.com" emails using Zod refine',
+      },
+    },
   },
 };

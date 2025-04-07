@@ -65,7 +65,8 @@ describe("EmailInput", () => {
     );
 
     const input = screen.getByLabelText("Email Address");
-    expect(input).toHaveAttribute("type", "email");
+    expect(input).toHaveAttribute("type", "text");
+    expect(input).toHaveAttribute("inputMode", "email");
   });
 
   it("applies className correctly", () => {
@@ -199,5 +200,18 @@ describe("EmailInput", () => {
     // Input should still be accessible by label
     const input = screen.getByLabelText("Email Address");
     expect(input).toBeInTheDocument();
+  });
+
+  it("adds asterisk to label when required", () => {
+    render(
+      <FormWrapper>
+        <EmailInput name="email" label="Email Address" required={true} />
+      </FormWrapper>
+    );
+
+    const label = screen.getByText("Email Address");
+    // Check the parent element has the CSS class for the asterisk
+    expect(label).toHaveClass("after:content-['*']");
+    expect(label).toHaveClass("after:text-red-500");
   });
 });

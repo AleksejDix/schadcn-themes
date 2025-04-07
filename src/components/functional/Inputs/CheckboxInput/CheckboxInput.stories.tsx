@@ -3,11 +3,8 @@ import { CheckboxForm } from "./CheckboxInput.example";
 
 const meta: Meta<typeof CheckboxForm> = {
   component: CheckboxForm,
-  title: "Inputs/checkbox",
+  title: "Inputs/Checkbox",
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
 };
 
 export default meta;
@@ -19,26 +16,10 @@ export const Default: Story = {
   },
 };
 
-export const WithDescription: Story = {
+export const Description: Story = {
   args: {
     label: "I accept the terms and conditions",
     description: "You must accept the terms and conditions to continue",
-  },
-};
-
-export const Required: Story = {
-  args: {
-    label: "Subscribe to our newsletter",
-    description: "We'll send you updates about our product",
-    required: true,
-  },
-};
-
-export const WithError: Story = {
-  args: {
-    label: "Accept Terms",
-    description: "Please accept our terms and conditions",
-    errorMessage: "You must accept the terms and conditions to continue",
   },
 };
 
@@ -50,16 +31,30 @@ export const Disabled: Story = {
   },
 };
 
+export const Error: Story = {
+  args: {
+    label: "Accept Terms",
+    description: "Please accept our terms and conditions",
+    errorMessage: "You must accept the terms and conditions to continue",
+  },
+};
+
 export const HiddenLabel: Story = {
   args: {
     label: "I accept the terms and conditions",
-    description:
-      "This checkbox has a hidden label, only visible to screen readers",
     hideLabel: true,
   },
 };
 
-export const DefaultChecked: Story = {
+export const Multiline: Story = {
+  args: {
+    label:
+      "I have read and agree to the privacy policy, terms of service, and cookie policy. This is a longer label that demonstrates how the component handles text wrapping for longer content.",
+    description: "Please ensure you've read all documents before continuing",
+  },
+};
+
+export const Prefilled: Story = {
   args: {
     label: "I want to receive marketing emails",
     description: "You can unsubscribe at any time",
@@ -67,10 +62,10 @@ export const DefaultChecked: Story = {
   },
 };
 
-export const LongLabel: Story = {
+export const Required: Story = {
   args: {
-    label:
-      "I have read and agree to the privacy policy, terms of service, and cookie policy. This is a longer label that demonstrates how the component handles text wrapping for longer content.",
-    description: "Please ensure you've read all documents before continuing",
+    label: "Subscribe to our newsletter",
+    description: "We'll send you updates about our product",
+    required: true,
   },
 };

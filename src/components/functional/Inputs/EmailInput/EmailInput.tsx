@@ -30,7 +30,7 @@ export const EmailInput = ({
   description,
   className,
   hideLabel = false,
-  placeholder,
+  placeholder = "email@example.com",
   autoComplete = "email",
   disabled = false,
   required = false,
@@ -39,7 +39,14 @@ export const EmailInput = ({
 
   const renderLabel = () =>
     label ? (
-      <FormLabel className={cn(hideLabel && "sr-only")}>{label}</FormLabel>
+      <FormLabel
+        className={cn(
+          hideLabel && "sr-only",
+          required && "after:content-['*'] after:ml-0.5 after:text-red-500"
+        )}
+      >
+        {label}
+      </FormLabel>
     ) : null;
 
   const renderDescription = () =>
@@ -48,7 +55,8 @@ export const EmailInput = ({
   const renderInput = (field: FieldValues) => (
     <FormControl>
       <Input
-        type="email"
+        type="text"
+        inputMode="email"
         {...field}
         placeholder={placeholder}
         autoComplete={autoComplete}
@@ -62,6 +70,9 @@ export const EmailInput = ({
     <FormField
       control={control}
       name={name}
+      rules={{
+        required: required && "This field is required",
+      }}
       render={({ field }) => (
         <FormItem className={className}>
           {renderLabel()}

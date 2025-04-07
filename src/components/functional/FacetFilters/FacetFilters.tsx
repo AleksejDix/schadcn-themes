@@ -32,9 +32,6 @@ export const FacetFilters = () => {
     .toISOString()
     .split("T")[0]; // Format as yyyy-MM-dd
 
-  console.log("Swiss today (yyyy-MM-dd):", swissToday);
-  console.log("Swiss yesterday (yyyy-MM-dd):", swissYesterday);
-
   // Define the initial/default values for the form
   const initialValues = {
     participantid: null as number | null,

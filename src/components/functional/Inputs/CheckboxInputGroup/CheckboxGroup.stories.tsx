@@ -29,7 +29,7 @@ const technologies: CheckboxOption[] = [
 
 const meta: Meta<typeof CheckboxGroupForm> = {
   component: CheckboxGroupForm,
-  title: "Inputs/checkbox group",
+  title: "Inputs/Checkbox Group",
   tags: ["autodocs"],
 };
 
@@ -39,17 +39,39 @@ type Story = StoryObj<typeof CheckboxGroupForm>;
 export const Default: Story = {
   args: {
     label: "Programming Languages",
+    options: programmingLanguages,
+  },
+};
+
+export const Description: Story = {
+  args: {
+    label: "Programming Languages",
     description: "Select the programming languages you know",
     options: programmingLanguages,
   },
 };
 
-export const WithPreselectedValues: Story = {
+export const OptionsScrollable: Story = {
   args: {
-    label: "Programming Languages",
-    description: "Select the programming languages you know",
-    options: programmingLanguages,
-    defaultValue: ["javascript", "typescript"],
+    label: "Frontend Technologies",
+    description: "Some options are not available for selection",
+    options: technologies,
+  },
+};
+
+export const OptionsDisabled: Story = {
+  args: {
+    label: "Frontend Technologies",
+    description: "Some options are not available for selection",
+    options: technologies,
+  },
+};
+
+export const OptionsEmpty: Story = {
+  args: {
+    label: "Frontend Technologies",
+    description: "Some options are not available for selection",
+    options: [],
   },
 };
 
@@ -62,17 +84,7 @@ export const Required: Story = {
   },
 };
 
-export const WithMinimumRequired: Story = {
-  args: {
-    label: "Hobbies",
-    description: "Select at least 2 hobbies you enjoy",
-    options: hobbies,
-    required: true,
-    minRequired: 2,
-  },
-};
-
-export const WithError: Story = {
+export const Error: Story = {
   args: {
     label: "Technologies",
     description: "Select the technologies you use",
@@ -81,20 +93,19 @@ export const WithError: Story = {
   },
 };
 
-export const WithDisabledOptions: Story = {
-  args: {
-    label: "Frontend Technologies",
-    description: "Some options are not available for selection",
-    options: technologies,
-  },
-};
-
 export const HiddenLabel: Story = {
   args: {
     label: "Programming Languages",
-    description:
-      "This group has a hidden label, only visible to screen readers",
     options: programmingLanguages,
     hideLabel: true,
+  },
+};
+
+export const Prefilled: Story = {
+  args: {
+    label: "Programming Languages",
+    description: "Select the programming languages you know",
+    options: programmingLanguages,
+    defaultValue: ["javascript", "typescript"],
   },
 };

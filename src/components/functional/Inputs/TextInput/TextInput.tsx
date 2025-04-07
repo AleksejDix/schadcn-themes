@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
+import { Required } from "../Core/Required";
 
 type TextInputAutocompleteOption =
   | "off"
@@ -34,15 +35,6 @@ type TextInputAutocompleteOption =
   | "organization"
   | "url";
 
-type InputType =
-  | "text"
-  | "email"
-  | "number"
-  | "date"
-  | "password"
-  | "tel"
-  | "url";
-
 type Props = {
   name: string;
   label: string;
@@ -56,7 +48,6 @@ type Props = {
   maxLength?: number;
   pattern?: string;
   defaultValue?: string;
-  type?: InputType;
 };
 
 export const TextInput = ({
@@ -71,19 +62,15 @@ export const TextInput = ({
   required = false,
   maxLength,
   pattern,
-  type = "text",
+  defaultValue,
 }: Props) => {
   const { control } = useFormContext();
 
   const renderLabel = () =>
     label ? (
-      <FormLabel
-        className={cn(
-          hideLabel && "sr-only",
-          required && "after:content-['*'] after:ml-0.5 after:text-red-500"
-        )}
-      >
+      <FormLabel className={cn(hideLabel && "sr-only")}>
         {label}
+        <Required required={required} />
       </FormLabel>
     ) : null;
 
@@ -93,8 +80,8 @@ export const TextInput = ({
   const renderInput = (field: FieldValues) => (
     <FormControl>
       <Input
-        type={type}
         {...field}
+        type="text"
         placeholder={placeholder}
         autoComplete={autoComplete}
         disabled={disabled}
@@ -117,6 +104,7 @@ export const TextInput = ({
           <FormMessage />
         </FormItem>
       )}
+      defaultValue={defaultValue}
     />
   );
 };

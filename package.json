@@ -14,7 +14,8 @@
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:storybook": "vitest --config vitest.stories.config.ts"
+    "test:storybook": "vitest --project=storybook",
+    "test:storybook:coverage": "vitest run --config vitest.stories.config.ts --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

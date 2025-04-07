@@ -215,7 +215,7 @@ describe("TextInput", () => {
       test: z.string().min(1, "This field is required"),
     });
 
-    const { container } = render(
+    render(
       <FormWrapper validationSchema={validationSchema}>
         <TextInput name="test" label="Name" required={true} />
       </FormWrapper>
@@ -224,10 +224,9 @@ describe("TextInput", () => {
     // Submit without filling the input
     fireEvent.click(screen.getByText("Submit"));
 
-    // Wait for form message to appear
+    // Wait for the error message to appear in the document
     await waitFor(() => {
-      const formMessage = container.querySelector('[data-slot="form-message"]');
-      expect(formMessage).toBeInTheDocument();
+      expect(screen.getByText("This field is required")).toBeInTheDocument();
     });
   });
 });
