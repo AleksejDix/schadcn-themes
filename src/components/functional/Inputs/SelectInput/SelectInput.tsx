@@ -67,7 +67,7 @@ export const SelectInput = ({
     <FormControl>
       <Select
         onValueChange={field.onChange}
-        defaultValue={field.value}
+        defaultValue={field.value || ""}
         disabled={disabled}
       >
         <SelectTrigger>

@@ -48,6 +48,7 @@ type Props = {
   maxLength?: number;
   pattern?: string;
   defaultValue?: string;
+  type?: string;
 };
 
 export const TextInput = ({
@@ -63,6 +64,7 @@ export const TextInput = ({
   maxLength,
   pattern,
   defaultValue,
+  type = "text",
 }: Props) => {
   const { control } = useFormContext();
 
@@ -81,13 +83,14 @@ export const TextInput = ({
     <FormControl>
       <Input
         {...field}
-        type="text"
+        type={type}
         placeholder={placeholder}
         autoComplete={autoComplete}
         disabled={disabled}
         required={required}
         maxLength={maxLength}
         pattern={pattern}
+        value={field.value === null ? "" : field.value}
       />
     </FormControl>
   );

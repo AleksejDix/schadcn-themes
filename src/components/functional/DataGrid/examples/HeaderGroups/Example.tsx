@@ -40,6 +40,7 @@ const columns = [
             footer: (props) => props.column.id,
           }),
           columnHelper.accessor("status", {
+            id: "status2",
             header: "Status",
             footer: (props) => props.column.id,
           }),

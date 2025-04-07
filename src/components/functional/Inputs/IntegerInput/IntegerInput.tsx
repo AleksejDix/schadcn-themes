@@ -41,6 +41,7 @@ export const IntegerInput = ({
   min,
   max,
   step = 1,
+  defaultValue,
 }: Props) => {
   const { control, setValue, trigger } = useFormContext();
 
@@ -234,6 +235,7 @@ export const IntegerInput = ({
           </FormItem>
         );
       }}
+      defaultValue={defaultValue}
     />
   );
 };

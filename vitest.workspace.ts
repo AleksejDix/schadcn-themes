@@ -1,3 +1,5 @@
+/// <reference types="@vitest/browser/providers/playwright" />
+
 import { defineWorkspace } from "vitest/config";
 import { storybookTest } from "@storybook/experimental-addon-test/vitest-plugin";
 import path from "node:path";
@@ -25,12 +27,14 @@ export default defineWorkspace([
     ],
     test: {
       name: "storybook",
-      // Enable browser mode
       browser: {
         enabled: true,
-        name: "chromium",
-        // Make sure to install Playwright
         provider: "playwright",
+        instances: [
+          {
+            browser: "chromium",
+          },
+        ],
         headless: true,
       },
       setupFiles: ["./.storybook/vitest.setup.ts"],

@@ -32,7 +32,7 @@ export const CheckboxHeaderCell = ({ table, className }: HeaderProps) => {
     <Checkbox
       className={className}
       checked={isAllSelected}
-      indeterminate={isSomeSelected && !isAllSelected}
+      indeterminate={!isAllSelected && isSomeSelected}
       onCheckedChange={(checked) => table.toggleAllRowsSelected(!!checked)}
       aria-label="Select all rows"
     />

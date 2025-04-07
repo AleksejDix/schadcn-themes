@@ -38,8 +38,8 @@ export const FacetFilters = () => {
     datefrom: swissYesterday,
     dateto: swissToday,
     status: "TODO" as "TODO" | "DONE",
-    correlationreference: null,
-    technicalproductname: null,
+    correlationreference: "",
+    technicalproductname: "",
     transmissiontype: "RECEIVE" as "SEND" | "RECEIVE",
     offset: 0,
     limit: 30,
@@ -87,17 +87,40 @@ export const FacetFilters = () => {
   // Initialize form with React Hook Form
   const form = useForm<FilterValues>({
     resolver: zodResolver(FormSchema),
-    defaultValues: queryValues as FilterValues,
+    defaultValues: {
+      ...initialValues,
+      ...queryValues,
+    } as FilterValues,
   });
 
   // Handle form reset to initial values
   const handleReset = () => {
-    form.reset(initialValues);
+    // Convert nulls to empty strings for text inputs to avoid React warnings
+    const resetValues = {
+      ...initialValues,
+      correlationreference:
+        initialValues.correlationreference === null
+          ? ""
+          : initialValues.correlationreference,
+      technicalproductname:
+        initialValues.technicalproductname === null
+          ? ""
+          : initialValues.technicalproductname,
+    };
+    form.reset(resetValues as FilterValues);
     setQueryValues(initialValues);
   };
 
   function onSubmit(data: FilterValues) {
-    setQueryValues(data);
+    // Ensure null values are handled correctly
+    const processedData = {
+      ...data,
+      correlationreference:
+        data.correlationreference === "" ? null : data.correlationreference,
+      technicalproductname:
+        data.technicalproductname === "" ? null : data.technicalproductname,
+    };
+    setQueryValues(processedData);
   }
 
   // Options for select inputs
@@ -151,12 +174,14 @@ export const FacetFilters = () => {
               name="correlationreference"
               label="Correlation Reference"
               placeholder="Enter correlation reference"
+              defaultValue={""}
             />
 
             <TextInput
               name="technicalproductname"
               label="Technical Product Name"
               placeholder="Enter product name"
+              defaultValue={""}
             />
 
             <SelectInput
